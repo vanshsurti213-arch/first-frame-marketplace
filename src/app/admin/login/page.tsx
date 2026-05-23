@@ -1,20 +1,32 @@
 "use client";
 
 import React, { useState } from "react";
-import { createClient } from "@/lib/supabase/client";
+import { createClient, type SupabaseClient } from "@/lib/supabase/client";
 import { LoadingSpinner } from "@/components/shared/LoadingSpinner";
 import { AlertCircle } from "lucide-react";
 
 export default function AdminLoginPage() {
-  const supabase = createClient();
+  const [supabase, setSupabase] = useState<SupabaseClient | null>(null);
   const [email, setEmail] = useState("admin@firstframe.in");
   const [password, setPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [status, setStatus] = useState("");
   const [loading, setLoading] = useState(false);
+  
+  // Only initialize Supabase on the client side
+  React.useEffect(() => {
+    const client = createClient();
+    setSupabase(client);
+  }, []);
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
+    
+    if (!supabase) {
+      setError("Supabase is not configured. Please set NEXT_PUBLIC_SUPABASE_URL and NEXT_PUBLIC_SUPABASE_ANON_KEY environment variables in .env.local");
+      return;
+    }
+
     if (!email || !password) {
       setError("Please enter both email and password.");
       return;
@@ -73,7 +85,7 @@ export default function AdminLoginPage() {
         return; // don't reset loading — page is navigating
       }
     } catch (err) {
-      console.error("Login error:", err);
+      console.error("[v0] Login error:", err);
       if (err instanceof DOMException && err.name === "AbortError") {
         setError("Connection timed out. Check your internet and try again.");
       } else {
