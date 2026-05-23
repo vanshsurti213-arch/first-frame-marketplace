@@ -2,7 +2,7 @@
 
 import React, { createContext, useContext, useEffect, useState, useCallback } from "react";
 import { useRouter, usePathname } from "next/navigation";
-import { createClient } from "@/lib/supabase/client";
+import { createClient, type SupabaseClient } from "@/lib/supabase/client";
 import type { AdminSession } from "@/types";
 
 interface AuthContextType {
@@ -20,11 +20,22 @@ const AuthContext = createContext<AuthContextType>({
 export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [admin, setAdmin] = useState<AdminSession | null>(null);
   const [loading, setLoading] = useState(true);
+  const [supabase, setSupabase] = useState<SupabaseClient | null>(null);
   const router = useRouter();
   const pathname = usePathname();
-  const supabase = createClient();
+  
+  // Initialize Supabase client on mount
+  useEffect(() => {
+    setSupabase(createClient());
+  }, []);
 
   useEffect(() => {
+    if (!supabase) {
+      console.warn("[v0] Supabase not configured - skipping auth check");
+      setLoading(false);
+      return;
+    }
+
     const checkSession = async () => {
       try {
         const { data: { user } } = await supabase.auth.getUser();
@@ -51,7 +62,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         } else {
           setAdmin(null);
         }
-      } catch {
+      } catch (error) {
+        console.warn("[v0] Auth check error:", error);
         setAdmin(null);
       } finally {
         setLoading(false);
@@ -89,7 +101,13 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   }, [supabase]);
 
   const signOut = useCallback(async () => {
-    await supabase.auth.signOut();
+    if (supabase) {
+      try {
+        await supabase.auth.signOut();
+      } catch (error) {
+        console.warn("[v0] Sign out error:", error);
+      }
+    }
     setAdmin(null);
     router.push("/admin/login");
   }, [supabase, router]);
