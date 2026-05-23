@@ -32,37 +32,98 @@ export default function CampaignDetailPage() {
   const [submissions, setSubmissions] = useState<ContentSubmission[]>([]);
   const [activityLog, setActivityLog] = useState<ActivityLogEntry[]>([]);
   const [loading, setLoading] = useState(true);
+  const [tabLoading, setTabLoading] = useState<Record<Tab, boolean>>({ creators: false, products: false, submissions: false, activity: false });
+  const [loadedTabs, setLoadedTabs] = useState<Set<Tab>>(new Set(["creators"]));
 
   // Inline edit states
   const [rateInputs, setRateInputs] = useState<Record<string, { agreed: string; brand: string }>>({});
   const [revisionFeedback, setRevisionFeedback] = useState<Record<string, string>>({});
   const [expandedProduct, setExpandedProduct] = useState<string | null>(null);
 
-  const fetchAll = useCallback(async () => {
-    if (!campaignId) return;
-    try {
-      const [campRes, ccRes, prodRes, subRes, logRes] = await Promise.all([
-        supabase.from("campaigns").select("*").eq("id", campaignId).single(),
-        supabase.from("campaign_creators").select("*").eq("campaign_id", campaignId).order("invited_at", { ascending: false }),
-        supabase.from("products").select("*").eq("campaign_id", campaignId).order("created_at", { ascending: false }),
-        supabase.from("content_submissions").select("*").eq("campaign_id", campaignId).order("submitted_at", { ascending: false }),
-        supabase.from("activity_log").select("*").eq("campaign_id", campaignId).order("timestamp", { ascending: false }).limit(50),
-      ]);
-      if (campRes.data) setCampaign(campRes.data);
-      setCampaignCreators(ccRes.data || []);
-      setProducts(prodRes.data || []);
-      setSubmissions(subRes.data || []);
-      setActivityLog(logRes.data || []);
-    } catch (err) {
-      console.error(err);
-    } finally {
-      setLoading(false);
-    }
-  }, [campaignId, supabase]);
-
+  // Fetch only campaign on initial load (fast)
   useEffect(() => {
-    if (!authLoading && admin) fetchAll();
-  }, [admin, authLoading, fetchAll]);
+    if (!campaignId || authLoading || !admin) return;
+    
+    const fetchCampaign = async () => {
+      try {
+        const { data } = await supabase.from("campaigns").select("*").eq("id", campaignId).single();
+        if (data) setCampaign(data);
+      } catch (err) {
+        console.error("[v0] Campaign fetch error:", err);
+      } finally {
+        setLoading(false);
+      }
+    };
+    
+    fetchCampaign();
+  }, [campaignId, authLoading, admin, supabase]);
+
+  // Fetch tab data on demand (lazy loading)
+  const fetchTabData = useCallback(async (tab: Tab) => {
+    if (loadedTabs.has(tab)) return; // Already loaded
+    
+    setTabLoading((prev) => ({ ...prev, [tab]: true }));
+    try {
+      if (tab === "creators") {
+        const { data } = await supabase
+          .from("campaign_creators")
+          .select("*")
+          .eq("campaign_id", campaignId)
+          .order("invited_at", { ascending: false });
+        setCampaignCreators(data || []);
+      } else if (tab === "products") {
+        const { data } = await supabase
+          .from("products")
+          .select("*")
+          .eq("campaign_id", campaignId)
+          .order("created_at", { ascending: false });
+        setProducts(data || []);
+      } else if (tab === "submissions") {
+        const { data } = await supabase
+          .from("content_submissions")
+          .select("*")
+          .eq("campaign_id", campaignId)
+          .order("submitted_at", { ascending: false });
+        setSubmissions(data || []);
+      } else if (tab === "activity") {
+        const { data } = await supabase
+          .from("activity_log")
+          .select("*")
+          .eq("campaign_id", campaignId)
+          .order("timestamp", { ascending: false })
+          .limit(50);
+        setActivityLog(data || []);
+      }
+      setLoadedTabs((prev) => new Set([...prev, tab]));
+    } catch (err) {
+      console.error(`[v0] Tab data fetch error for ${tab}:`, err);
+    } finally {
+      setTabLoading((prev) => ({ ...prev, [tab]: false }));
+    }
+  }, [campaignId, loadedTabs, supabase]);
+
+  // Load creators tab data initially
+  useEffect(() => {
+    if (!loading && campaign && !loadedTabs.has("creators")) {
+      fetchTabData("creators");
+    }
+  }, [loading, campaign, loadedTabs, fetchTabData]);
+
+  // Fetch tab data when tab changes
+  useEffect(() => {
+    if (!loading && campaign) {
+      fetchTabData(activeTab);
+    }
+  }, [activeTab, loading, campaign, fetchTabData]);
+
+  const refreshCurrentTab = useCallback(async () => {
+    setLoadedTabs((prev) => {
+      const newSet = new Set(prev);
+      newSet.delete(activeTab);
+      return newSet;
+    });
+    await fetchTabData(activeTab);
+  }, [activeTab, fetchTabData]);
 
   const approveInvite = async (cc: CampaignCreator) => {
     const rates = rateInputs[cc.id];
@@ -80,7 +141,7 @@ export default function CampaignDetailPage() {
       .eq("id", cc.id);
     if (error) { toast.error("Failed to approve"); return; }
     toast.success(`Approved ${cc.creator_name}`);
-    fetchAll();
+    refreshCurrentTab();
   };
 
   const rejectInvite = async (cc: CampaignCreator) => {
@@ -90,7 +151,7 @@ export default function CampaignDetailPage() {
       .eq("id", cc.id);
     if (error) { toast.error("Failed to reject"); return; }
     toast.success(`Rejected ${cc.creator_name}`);
-    fetchAll();
+    refreshCurrentTab();
   };
 
   const approveSubmission = async (sub: ContentSubmission) => {
@@ -104,7 +165,7 @@ export default function CampaignDetailPage() {
       .eq("id", sub.id);
     if (error) { toast.error("Failed to approve submission"); return; }
     toast.success("Submission approved");
-    fetchAll();
+    refreshCurrentTab();
   };
 
   const requestRevision = async (sub: ContentSubmission) => {
@@ -125,7 +186,7 @@ export default function CampaignDetailPage() {
     if (error) { toast.error("Failed to request revision"); return; }
     toast.success("Revision requested");
     setRevisionFeedback((prev) => ({ ...prev, [sub.id]: "" }));
-    fetchAll();
+    refreshCurrentTab();
   };
 
   if (authLoading || loading) return <FullPageLoader message="Loading campaign..." />;
