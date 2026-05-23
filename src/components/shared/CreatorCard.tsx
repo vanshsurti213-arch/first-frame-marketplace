@@ -81,49 +81,52 @@ export function CreatorCard({
       onClick={handleClick}
       whileHover={{ scale: 1.03, y: -4, transition: { duration: 0.2, ease: "easeOut" } }}
     >
-      {/* Thumbnail / Video */}
       {thumbnailUrl ? (
         <img
           src={thumbnailUrl}
           alt={name}
           className="creator-card__thumbnail"
-          loading="lazy"
         />
       ) : !videoUrl ? (
-        <div className="creator-card__thumbnail bg-gradient-to-br from-[#1A1A1F] to-[#0C0C0F] flex items-center justify-center">
-          <span className="text-4xl font-display font-bold text-[#4A4A5A]">
+        <div className="creator-card__thumbnail flex items-center justify-center" style={{
+          background: 'linear-gradient(135deg, var(--surface-2) 0%, var(--bg-deep) 100%)'
+        }}>
+          <span className="text-6xl font-display font-light text-[var(--cream-faint)] opacity-30">
             {name.charAt(0).toUpperCase()}
           </span>
         </div>
       ) : null}
 
-      {/* Video overlay */}
+      {/* Hover Video Player (Unchanged functionality, just updated class references if any) */}
       {videoUrl && (
-        <video
-          ref={videoRef}
-          src={videoUrl}
-          className={cn(
-            "absolute inset-0 w-full h-full object-cover bg-black transition-opacity duration-300",
+        <div 
+          className={`absolute inset-0 transition-opacity duration-500 z-10 bg-[#0C1130] ${
             (isHovered || !thumbnailUrl) ? "opacity-100" : "opacity-0"
-          )}
-          muted
-          loop
-          playsInline
-        />
-      )}
-
-      {/* Mute Toggle */}
-      {videoUrl && (
-        <button
-          onClick={toggleMute}
-          className="absolute top-3 left-3 z-20 w-8 h-8 rounded-full bg-black/40 backdrop-blur-md flex items-center justify-center text-white/90 hover:bg-black/60 transition-all"
+          }`}
         >
-          {isMuted ? <VolumeX className="w-4 h-4" /> : <Volume2 className="w-4 h-4" />}
-        </button>
+          <video
+            ref={videoRef}
+            src={videoUrl}
+            loop
+            muted={isMuted}
+            playsInline
+            className="w-full h-full object-cover"
+          />
+          <button
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              setIsMuted(!isMuted);
+            }}
+            className="absolute bottom-4 right-4 z-20 w-8 h-8 rounded-full bg-black/40 backdrop-blur-md flex items-center justify-center text-white/80 hover:text-white border border-white/10 transition-all hover:bg-black/60"
+          >
+            {isMuted ? <VolumeX className="w-4 h-4" /> : <Volume2 className="w-4 h-4" />}
+          </button>
+        </div>
       )}
 
-      {/* Gradient overlay */}
-      <div className="creator-card__overlay" />
+      {/* Gradient Overlay */}
+      <div className="creator-card__overlay z-10 pointer-events-none" />
 
       {/* Play button */}
       {videoUrl && (

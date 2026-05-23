@@ -10,77 +10,82 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        // Firstframe V2 Design System
-        background: "var(--background)",
-        foreground: "var(--foreground)",
+        // Master UI Design System
+        background: "var(--bg-mid)",
+        foreground: "var(--cream)",
 
-        // Brand tokens
         ff: {
-          lime: "#CAFF4C",
-          "lime-hover": "#B8F030",
-          "lime-muted": "rgba(202,255,76,0.12)",
-          black: "#0C0C0F",
-          coral: "#FF6B5B",
-          sky: "#5BAAFF",
-          jade: "#2DD4A1",
-          amber: "#FFB547",
+          deep: "#0C1130",
+          mid: "#0F1640",
+          glow: "#162156",
+          surface: "#141B3D",
+          "surface-2": "#1B2348",
+          cream: "#EDE8DC",
+          "cream-muted": "rgba(237,232,220,0.45)",
+          "cream-faint": "rgba(237,232,220,0.18)",
+          gold: "#C9A257",
+          "gold-muted": "rgba(201,162,87,0.15)",
+          "gold-border": "rgba(201,162,87,0.3)",
+          green: "#1C3929",
+          "green-light": "#3E8C60",
+          "green-border": "rgba(62,140,96,0.25)",
         },
 
-        // Glass surfaces
+        // Legacy compatibility tokens mapped to new system
         glass: {
-          dark: "rgba(255,255,255,0.04)",
-          "dark-border": "rgba(255,255,255,0.09)",
-          light: "rgba(255,255,255,0.72)",
-          "light-border": "rgba(0,0,0,0.07)",
+          dark: "var(--surface)",
+          "dark-border": "var(--border)",
+          light: "var(--surface-2)",
+          "light-border": "var(--border-hover)",
         },
 
-        // shadcn/ui semantic tokens
+        // shadcn/ui semantic tokens (unified dark)
         card: {
-          DEFAULT: "var(--card)",
-          foreground: "var(--card-foreground)",
+          DEFAULT: "var(--surface)",
+          foreground: "var(--cream)",
         },
         popover: {
-          DEFAULT: "var(--popover)",
-          foreground: "var(--popover-foreground)",
+          DEFAULT: "var(--surface)",
+          foreground: "var(--cream)",
         },
         primary: {
-          DEFAULT: "var(--primary)",
-          foreground: "var(--primary-foreground)",
+          DEFAULT: "var(--gold)",
+          foreground: "#0C1130",
         },
         secondary: {
-          DEFAULT: "var(--secondary)",
-          foreground: "var(--secondary-foreground)",
+          DEFAULT: "var(--surface-2)",
+          foreground: "var(--cream)",
         },
         muted: {
-          DEFAULT: "var(--muted)",
-          foreground: "var(--muted-foreground)",
+          DEFAULT: "var(--surface)",
+          foreground: "var(--cream-muted)",
         },
         accent: {
-          DEFAULT: "var(--accent)",
-          foreground: "var(--accent-foreground)",
+          DEFAULT: "var(--gold-muted)",
+          foreground: "var(--gold)",
         },
         destructive: {
-          DEFAULT: "var(--destructive)",
-          foreground: "var(--destructive-foreground)",
+          DEFAULT: "#E05040",
+          foreground: "#FFFFFF",
         },
         border: "var(--border)",
-        input: "var(--input)",
-        ring: "var(--ring)",
+        input: "var(--border)",
+        ring: "var(--gold)",
         sidebar: {
-          DEFAULT: "var(--sidebar)",
-          foreground: "var(--sidebar-foreground)",
-          primary: "var(--sidebar-primary)",
-          "primary-foreground": "var(--sidebar-primary-foreground)",
-          accent: "var(--sidebar-accent)",
-          "accent-foreground": "var(--sidebar-accent-foreground)",
-          border: "var(--sidebar-border)",
-          ring: "var(--sidebar-ring)",
+          DEFAULT: "var(--bg-deep)",
+          foreground: "var(--cream)",
+          primary: "var(--gold)",
+          "primary-foreground": "#0C1130",
+          accent: "var(--surface-2)",
+          "accent-foreground": "var(--cream)",
+          border: "var(--border)",
+          ring: "var(--gold)",
         },
       },
       fontFamily: {
-        sans: ["'DM Sans'", "system-ui", "sans-serif"],
-        display: ["'Syne'", "system-ui", "sans-serif"],
-        heading: ["'Syne'", "system-ui", "sans-serif"],
+        sans: ["'Syne'", "system-ui", "sans-serif"],
+        display: ["'Fraunces'", "serif"],
+        heading: ["'Fraunces'", "serif"],
         mono: ["'JetBrains Mono'", "monospace"],
       },
       borderRadius: {
