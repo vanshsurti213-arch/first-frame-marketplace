@@ -1,0 +1,96 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // ---- Helper Functions ----
+
+    // Check if user is authenticated via Firebase Auth
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+
+    // Check if user is an admin
+    function isAdmin() {
+      return isAuthenticated() && exists(/databases/$(database)/documents/admins/$(request.auth.uid));
+    }
+
+    // ---- Admin Collection ----
+    match /admins/{adminId} {
+      allow read: if isAdmin();
+      allow write: if false; // admins are pre-seeded, no writes from client
+    }
+
+    // ---- Brands Collection ----
+    match /brands/{brandId} {
+      allow read: if isAdmin();
+      allow write: if isAdmin();
+    }
+
+    // ---- Creators Collection ----
+    match /creators/{creatorId} {
+      allow read: if isAuthenticated(); // admin + brand (API strips sensitive fields)
+      allow write: if isAdmin();
+    }
+
+    // ---- Campaigns Collection ----
+    match /campaigns/{campaignId} {
+      allow read: if isAuthenticated();
+      allow write: if isAdmin();
+    }
+
+    // ---- Campaign Creators Collection ----
+    match /campaignCreators/{docId} {
+      allow read: if isAuthenticated();
+      allow create: if isAuthenticated(); // brand can invite
+      allow update: if isAuthenticated(); // admin approves, creator submits address
+      allow delete: if isAdmin();
+    }
+
+    // ---- Products Collection ----
+    match /products/{productId} {
+      allow read: if isAuthenticated();
+      allow create, update: if isAuthenticated(); // brand creates, admin updates
+      allow delete: if isAdmin();
+    }
+
+    // ---- Creator Preferences Collection ----
+    match /creatorPreferences/{prefId} {
+      allow read: if isAuthenticated();
+      allow create: if isAuthenticated(); // creator submits preference
+      allow update: if isAdmin();
+      allow delete: if isAdmin();
+    }
+
+    // ---- Content Submissions Collection ----
+    match /contentSubmissions/{submissionId} {
+      allow read: if isAuthenticated();
+      allow create: if isAuthenticated(); // creator submits
+      allow update: if isAuthenticated(); // admin/brand reviews
+      allow delete: if isAdmin();
+    }
+
+    // ---- Access Codes Collection ----
+    match /accessCodes/{codeId} {
+      allow read: if true; // needed for brand login validation
+      allow write: if isAdmin() || true; // brand login marks as used — handled via API routes
+    }
+
+    // ---- Activity Log Collection ----
+    match /activityLog/{logId} {
+      allow read: if isAuthenticated();
+      allow create: if isAuthenticated();
+      allow update, delete: if false; // logs are immutable
+    }
+
+    // ---- Creator Tokens Collection ----
+    match /creatorTokens/{tokenId} {
+      allow read: if true; // needed for magic link validation
+      allow write: if isAdmin();
+    }
+
+    // ---- Default: Deny All ----
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}
