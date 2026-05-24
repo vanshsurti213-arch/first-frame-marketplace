@@ -60,7 +60,9 @@ export function CreatorCard({
   const handleMouseLeave = () => {
     setIsHovered(false);
     if (videoRef.current) {
-      videoRef.current.pause();
+      if (thumbnailUrl) {
+        videoRef.current.pause();
+      }
     }
   };
 
@@ -108,6 +110,8 @@ export function CreatorCard({
             loop
             muted={isMuted}
             playsInline
+            autoPlay={!thumbnailUrl}
+            preload={thumbnailUrl ? "none" : "auto"}
             className="w-full h-full object-cover"
           />
           <button
