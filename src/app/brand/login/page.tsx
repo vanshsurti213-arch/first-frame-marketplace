@@ -62,42 +62,42 @@ function BrandLoginForm() {
 
   if (showWelcome) {
     return (
-      <div className="min-h-screen bg-brand-gradient flex items-center justify-center p-6">
+      <div className="min-h-screen bg-[#050505] flex items-center justify-center p-6">
         <div className="text-center animate-fade-in">
-          <div className="w-16 h-16 rounded-full bg-[#2DD4A1] flex items-center justify-center mx-auto mb-6 animate-scale-in">
+          <div className="w-16 h-16 rounded-full bg-[#22C55E] flex items-center justify-center mx-auto mb-6 animate-scale-in">
             <CheckCircle className="w-8 h-8 text-white" />
           </div>
-          <h1 className="font-display font-bold text-3xl text-[#111116] mb-2">
+          <h1 className="font-display font-bold text-3xl text-white mb-2">
             Welcome, {showWelcome} ✓
           </h1>
-          <p className="text-[#5A5A6E]">Redirecting to your campaign...</p>
+          <p className="text-white/35">Redirecting to your campaign...</p>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-brand-gradient flex items-center justify-center p-6">
+    <div className="min-h-screen bg-[#050505] flex items-center justify-center p-6">
       <div className="w-full max-w-md animate-fade-in">
-        <div className="glass-card-light p-8">
+        <div className="glass-card p-8">
           {/* Logo */}
           <div className="text-center mb-8">
-            <h1 className="font-display font-extrabold text-3xl text-[#111116]">
+            <h1 className="font-display font-extrabold text-3xl text-white">
               Firstframe
             </h1>
-            <p className="text-sm text-[#5A5A6E] mt-2">
+            <p className="text-sm text-white/35 mt-2">
               Enter your access code to continue
             </p>
           </div>
 
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
             <div>
-              <label className="block text-xs font-semibold uppercase tracking-wider text-[#5A5A6E] mb-2">
+              <label className="block text-xs font-semibold uppercase tracking-wider text-white/35 mb-2">
                 Company Name
               </label>
               <input
                 {...register("companyName")}
-                className="w-full px-4 py-3 rounded-xl bg-[#F5F5F7] border border-[rgba(0,0,0,0.07)] text-sm text-[#111116] placeholder:text-[#9A9AAA] focus:outline-none focus:border-[#CAFF4C] focus:ring-1 focus:ring-[#CAFF4C] transition-colors"
+                className="w-full px-4 py-3 rounded-xl bg-white/[0.04] border border-white/[0.08] text-sm text-white placeholder:text-white/45 focus:outline-none focus:border-white/30 focus:ring-1 focus:ring-white/20 transition-colors"
                 placeholder="Your company name"
               />
               {errors.companyName && (
@@ -106,12 +106,12 @@ function BrandLoginForm() {
             </div>
 
             <div>
-              <label className="block text-xs font-semibold uppercase tracking-wider text-[#5A5A6E] mb-2">
+              <label className="block text-xs font-semibold uppercase tracking-wider text-white/35 mb-2">
                 Access Code
               </label>
               <input
                 {...register("accessCode")}
-                className="w-full px-4 py-3 rounded-xl bg-[#F5F5F7] border border-[rgba(0,0,0,0.07)] text-sm text-[#111116] font-mono tracking-widest uppercase placeholder:text-[#9A9AAA] placeholder:font-sans placeholder:tracking-normal placeholder:normal-case focus:outline-none focus:border-[#CAFF4C] focus:ring-1 focus:ring-[#CAFF4C] transition-colors"
+                className="w-full px-4 py-3 rounded-xl bg-white/[0.04] border border-white/[0.08] text-sm text-white font-mono tracking-widest uppercase placeholder:text-white/45 placeholder:font-sans placeholder:tracking-normal placeholder:normal-case focus:outline-none focus:border-white/30 focus:ring-1 focus:ring-white/20 transition-colors"
                 placeholder="Enter your code"
               />
               {errors.accessCode && (
@@ -129,7 +129,7 @@ function BrandLoginForm() {
             <button
               type="submit"
               disabled={isSubmitting}
-              className="w-full py-3 rounded-xl bg-[#111116] text-white text-sm font-semibold flex items-center justify-center gap-2 hover:bg-[#1A1A1F] transition-colors disabled:opacity-50"
+              className="w-full py-3 rounded-xl bg-white text-black text-sm font-semibold flex items-center justify-center gap-2 hover:bg-white/90 transition-colors disabled:opacity-50"
             >
               {isSubmitting ? (
                 <>
@@ -149,7 +149,7 @@ function BrandLoginForm() {
 
 export default function BrandLoginPage() {
   return (
-    <Suspense fallback={<div className="min-h-screen bg-brand-gradient flex items-center justify-center"><LoadingSpinner size="lg" color="#111116" /></div>}>
+    <Suspense fallback={<div className="min-h-screen bg-[#050505] flex items-center justify-center"><LoadingSpinner size="lg" color="#FFFFFF" /></div>}>
       <BrandLoginForm />
     </Suspense>
   );

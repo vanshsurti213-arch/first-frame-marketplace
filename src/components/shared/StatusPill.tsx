@@ -46,10 +46,10 @@ export function StatusPill({
 
   if (!config) {
     return (
-      <span className={cn("status-pill text-[#8A8A9A]", className)}>
+      <span className={cn("status-pill text-white/40", className)}>
         <span
           className="w-1.5 h-1.5 rounded-full flex-shrink-0"
-          style={{ background: "#8A8A9A" }}
+          style={{ background: "rgba(255,255,255,0.4)" }}
         />
         {status}
       </span>

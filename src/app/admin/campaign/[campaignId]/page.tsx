@@ -204,15 +204,15 @@ export default function CampaignDetailPage() {
       {/* Header */}
       <div className="mb-8">
         <div className="flex items-center gap-3 mb-2">
-          <h1 className="font-display font-bold text-2xl text-[#F2F2F3]">
+          <h1 className="font-display font-bold text-2xl text-white">
             {campaign.name}
           </h1>
           <StatusPill status={campaign.status} type="product" label={campaign.status.charAt(0).toUpperCase() + campaign.status.slice(1)} />
         </div>
-        <div className="flex items-center gap-4 text-sm text-[#8A8A9A]">
+        <div className="flex items-center gap-4 text-sm text-white/40">
           <span>{campaign.brand_name}</span>
           {campaign.collab_type && (
-            <span className="px-2 py-0.5 rounded-full text-xs bg-[rgba(202,255,76,0.12)] text-[#CAFF4C]">
+            <span className="px-2 py-0.5 rounded-full text-xs bg-white/[0.08] text-white">
               {campaign.collab_type}
             </span>
           )}
@@ -221,22 +221,22 @@ export default function CampaignDetailPage() {
       </div>
 
       {/* Tabs */}
-      <div className="flex gap-1 mb-6 border-b border-[rgba(255,255,255,0.07)] overflow-x-auto">
+      <div className="flex gap-1 mb-6 border-b border-white/[0.08] overflow-x-auto">
         {TABS.map((tab) => (
           <button
             key={tab.key}
             onClick={() => setActiveTab(tab.key)}
             className={`flex items-center gap-2 px-4 py-3 text-sm font-medium transition-colors border-b-2 whitespace-nowrap ${
               activeTab === tab.key
-                ? "text-[#CAFF4C] border-[#CAFF4C]"
-                : "text-[#8A8A9A] border-transparent hover:text-[#F2F2F3]"
+                ? "text-white border-white"
+                : "text-white/40 border-transparent hover:text-white"
             }`}
           >
             {tab.icon}
             {tab.label}
             {tab.count !== undefined && (
               <span className={`text-xs px-1.5 py-0.5 rounded-full ${
-                activeTab === tab.key ? "bg-[rgba(202,255,76,0.15)] text-[#CAFF4C]" : "bg-[rgba(255,255,255,0.06)] text-[#4A4A5A]"
+                activeTab === tab.key ? "bg-white/[0.15] text-white" : "bg-white/[0.04] text-white/20"
               }`}>
                 {tab.count}
               </span>
@@ -266,15 +266,15 @@ export default function CampaignDetailPage() {
                 <tbody>
                   {campaignCreators.map((cc) => (
                     <tr key={cc.id} className="table-row-hover border-b border-[rgba(255,255,255,0.05)]">
-                      <td className="px-5 py-4 text-sm font-medium text-[#F2F2F3]">{cc.creator_name}</td>
+                      <td className="px-5 py-4 text-sm font-medium text-white">{cc.creator_name}</td>
                       <td className="px-5 py-4"><StatusPill status={cc.status} /></td>
-                      <td className="px-5 py-4 text-sm text-[#8A8A9A]">{formatDate(cc.invited_at)}</td>
-                      <td className="px-5 py-4 text-sm text-[#8A8A9A]">
+                      <td className="px-5 py-4 text-sm text-white/40">{formatDate(cc.invited_at)}</td>
+                      <td className="px-5 py-4 text-sm text-white/40">
                         {cc.status === "invited" ? (
                           <input
                             type="number"
                             placeholder="₹0"
-                            className="w-20 px-2 py-1 rounded bg-[rgba(255,255,255,0.04)] border border-[rgba(255,255,255,0.09)] text-sm text-[#F2F2F3] focus:outline-none focus:border-[#CAFF4C]"
+                            className="w-20 px-2 py-1 rounded bg-white/[0.04] border border-white/[0.08] text-sm text-white focus:outline-none focus:border-white/30"
                             value={rateInputs[cc.id]?.agreed || ""}
                             onChange={(e) => setRateInputs((prev) => ({ ...prev, [cc.id]: { ...prev[cc.id], agreed: e.target.value } }))}
                           />
@@ -282,12 +282,12 @@ export default function CampaignDetailPage() {
                           cc.agreed_rate ? formatCurrency(cc.agreed_rate) : "—"
                         )}
                       </td>
-                      <td className="px-5 py-4 text-sm text-[#8A8A9A]">
+                      <td className="px-5 py-4 text-sm text-white/40">
                         {cc.status === "invited" ? (
                           <input
                             type="number"
                             placeholder="₹0"
-                            className="w-20 px-2 py-1 rounded bg-[rgba(255,255,255,0.04)] border border-[rgba(255,255,255,0.09)] text-sm text-[#F2F2F3] focus:outline-none focus:border-[#CAFF4C]"
+                            className="w-20 px-2 py-1 rounded bg-white/[0.04] border border-white/[0.08] text-sm text-white focus:outline-none focus:border-white/30"
                             value={rateInputs[cc.id]?.brand || ""}
                             onChange={(e) => setRateInputs((prev) => ({ ...prev, [cc.id]: { ...prev[cc.id], brand: e.target.value } }))}
                           />
@@ -446,10 +446,10 @@ export default function CampaignDetailPage() {
                                 onChange={(e) => setRevisionFeedback((prev) => ({ ...prev, [sub.id]: e.target.value }))}
                                 placeholder="What needs to change?"
                                 rows={2}
-                                className="flex-1 px-4 py-2 rounded-lg bg-[rgba(255,255,255,0.04)] border border-[rgba(255,255,255,0.09)] text-sm text-[#F2F2F3] placeholder:text-[#4A4A5A] focus:outline-none focus:border-[#FFB547] resize-none"
+                                className="flex-1 px-4 py-2 rounded-lg bg-white/[0.04] border border-white/[0.08] text-sm text-white placeholder:text-white/25 focus:outline-none focus:border-orange-500/40 resize-none"
                               />
-                              <button onClick={() => requestRevision(sub)} className="btn-lime text-xs h-fit self-end">Send</button>
-                              <button onClick={() => setRevisionFeedback((prev) => { const n = { ...prev }; delete n[sub.id]; return n; })} className="text-xs text-[#8A8A9A] hover:text-[#F2F2F3] h-fit self-end">Cancel</button>
+                              <button onClick={() => requestRevision(sub)} className="btn-primary text-xs h-fit self-end">Send</button>
+                              <button onClick={() => setRevisionFeedback((prev) => { const n = { ...prev }; delete n[sub.id]; return n; })} className="text-xs text-white/40 hover:text-white h-fit self-end">Cancel</button>
                             </div>
                           </td>
                         </tr>

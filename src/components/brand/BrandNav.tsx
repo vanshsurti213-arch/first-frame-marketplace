@@ -19,12 +19,12 @@ export function BrandNav() {
   const { brand, clearSession } = useBrand();
 
   return (
-    <nav className="sticky top-0 z-40 w-full border-b border-[rgba(0,0,0,0.07)] bg-[#F7F7F8]/95 backdrop-blur-xl">
+    <nav className="sticky top-0 z-40 w-full border-b border-white/[0.08] bg-black/80 backdrop-blur-xl">
       <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
         {/* Left — Wordmark × Brand */}
-        <Link href="/brand/campaign" className="font-display font-bold text-lg text-[#111116] tracking-tight">
-          Firstframe <span className="text-[#9A9AAA] font-normal">×</span>{" "}
-          <span className="text-[#111116]">{brand?.companyName || "Brand"}</span>
+        <Link href="/brand/campaign" className="font-display font-bold text-lg text-white tracking-tight">
+          Firstframe <span className="text-white/30 font-normal">×</span>{" "}
+          <span className="text-white/80">{brand?.companyName || "Brand"}</span>
         </Link>
 
         {/* Center — Nav links */}
@@ -38,13 +38,13 @@ export function BrandNav() {
                 className={cn(
                   "relative px-4 py-2 text-sm font-medium transition-colors rounded-lg",
                   isActive
-                    ? "text-[#111116]"
-                    : "text-[#9A9AAA] hover:text-[#5A5A6E]"
+                    ? "text-white bg-white/[0.04]"
+                    : "text-white/40 hover:text-white hover:bg-white/[0.02]"
                 )}
               >
                 {link.label}
                 {isActive && (
-                  <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-6 h-0.5 rounded-full bg-[#CAFF4C]" />
+                  <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-white" />
                 )}
               </Link>
             );
@@ -54,7 +54,7 @@ export function BrandNav() {
         {/* Right — Logout */}
         <button
           onClick={clearSession}
-          className="flex items-center gap-2 text-sm text-[#9A9AAA] hover:text-[#5A5A6E] transition-colors"
+          className="flex items-center gap-2 text-sm text-white/40 hover:text-white transition-colors"
         >
           <LogOut className="w-4 h-4" />
           <span className="hidden sm:inline">Logout</span>

@@ -22,16 +22,16 @@ export default function HomePage() {
   }, [router]);
 
   return (
-    <div className="min-h-screen bg-[#0C0C0F] flex items-center justify-center">
+    <div className="min-h-screen bg-[#050505] flex items-center justify-center">
       <div className="text-center animate-fade-in">
         <h1 className="font-display font-extrabold text-4xl text-white tracking-tight mb-3">
           Firstframe
         </h1>
-        <p className="text-sm text-[#8A8A9A]">Redirecting...</p>
+        <p className="text-sm text-white/40">Redirecting...</p>
         <div className="mt-6 flex justify-center gap-1.5">
-          <div className="w-2 h-2 rounded-full bg-[#CAFF4C] animate-pulse-dot" />
-          <div className="w-2 h-2 rounded-full bg-[#CAFF4C] animate-pulse-dot" style={{ animationDelay: "200ms" }} />
-          <div className="w-2 h-2 rounded-full bg-[#CAFF4C] animate-pulse-dot" style={{ animationDelay: "400ms" }} />
+          <div className="w-2 h-2 rounded-full bg-white animate-pulse-dot" />
+          <div className="w-2 h-2 rounded-full bg-white animate-pulse-dot" style={{ animationDelay: "200ms" }} />
+          <div className="w-2 h-2 rounded-full bg-white animate-pulse-dot" style={{ animationDelay: "400ms" }} />
         </div>
       </div>
     </div>

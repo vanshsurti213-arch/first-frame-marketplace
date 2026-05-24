@@ -32,8 +32,8 @@ export const CAMPAIGN_CREATOR_STATUS_CONFIG: Record<
   },
   preference_pending: {
     label: "Awaiting Product Selection",
-    dotColor: "#CAFF4C",
-    bgColor: "rgba(202, 255, 76, 0.1)",
+    dotColor: "#FFB547",
+    bgColor: "rgba(255, 181, 71, 0.1)",
   },
   preference_submitted: {
     label: "Product Selected",

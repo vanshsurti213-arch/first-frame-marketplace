@@ -91,54 +91,54 @@ export default function CreatorProductDetailPage() {
     setIsSubmittingContent(false);
   };
 
-  if (creatorLoading || loading) return <FullPageLoader />;
-  if (!product) return <div className="text-center py-20 text-[#5A5A6E]">Product not found</div>;
+  if (creatorLoading || loading) return <FullPageLoader message="Loading product details..." />;
+  if (!product) return <div className="text-center py-20 text-white/40">Product not found</div>;
 
   const latestSub = submissions[0];
   const hasRevisionFeedback = latestSub?.status === "revision_requested" && latestSub.revision_feedback;
 
   return (
     <div className="animate-fade-in">
-      <button onClick={() => router.back()} className="flex items-center gap-1 text-sm text-[#5A5A6E] hover:text-[#111116] mb-4 min-h-[44px] transition-colors">
+      <button onClick={() => router.back()} className="flex items-center gap-1 text-sm text-white/40 hover:text-white mb-4 min-h-[44px] transition-colors">
         <ArrowLeft className="w-4 h-4" /> Back
       </button>
 
-      <h1 className="font-display font-bold text-xl text-[#111116] mb-6">{product.name}</h1>
+      <h1 className="font-display font-bold text-xl text-white mb-6">{product.name}</h1>
 
       {/* Section 1: Preference */}
       {!preference ? (
         <section className="mb-8">
-          <h2 className="font-display font-semibold text-base text-[#111116] mb-3 flex items-center gap-2">
-            <Package className="w-4 h-4" /> Choose your preferred variant
+          <h2 className="font-display font-semibold text-base text-white mb-3 flex items-center gap-2">
+            <Package className="w-4 h-4 text-white/40" /> Choose your preferred variant
           </h2>
           <div className="space-y-2 mb-4">
             {product.variants?.map((variant) => (
               <button
                 key={variant.id}
                 onClick={() => setSelectedVariant(variant.id)}
-                className={`w-full min-h-[64px] px-5 py-4 rounded-xl border-2 text-left transition-all flex items-center justify-between ${
+                className={`w-full min-h-[64px] px-5 py-4 rounded-xl border transition-all flex items-center justify-between ${
                   selectedVariant === variant.id
-                    ? "border-[#CAFF4C] bg-[rgba(202,255,76,0.06)]"
-                    : "border-[rgba(0,0,0,0.07)] bg-[#F5F5F7] hover:border-[rgba(0,0,0,0.15)]"
+                    ? "border-white bg-white/[0.04]"
+                    : "border-white/[0.08] bg-white/[0.02] hover:border-white/[0.15]"
                 }`}
               >
-                <span className="text-sm font-medium text-[#111116]">{variant.label}</span>
-                {selectedVariant === variant.id && <Check className="w-5 h-5 text-[#CAFF4C]" />}
+                <span className="text-sm font-medium text-white">{variant.label}</span>
+                {selectedVariant === variant.id && <Check className="w-5 h-5 text-white" />}
               </button>
             ))}
           </div>
-          <button onClick={submitPreference} disabled={!selectedVariant || isSubmittingPref} className="btn-lime-pill w-full text-base disabled:opacity-50 flex items-center justify-center gap-2">
-            {isSubmittingPref ? <LoadingSpinner size="sm" color="#0C0C0F" /> : null}
+          <button onClick={submitPreference} disabled={!selectedVariant || isSubmittingPref} className="btn-primary w-full text-base disabled:opacity-50 flex items-center justify-center gap-2">
+            {isSubmittingPref ? <LoadingSpinner size="sm" color="#050505" /> : null}
             Submit My Preference
           </button>
         </section>
       ) : (
         <section className="mb-8">
-          <div className="glass-card-light p-5">
+          <div className="glass-card p-5">
             <div className="flex items-center gap-2 text-sm text-[#2DD4A1] mb-1">
               <Check className="w-4 h-4" /> Your choice
             </div>
-            <p className="font-semibold text-[#111116]">{preference.selected_variant_label}</p>
+            <p className="font-semibold text-white">{preference.selected_variant_label}</p>
           </div>
         </section>
       )}
@@ -146,12 +146,12 @@ export default function CreatorProductDetailPage() {
       {/* Section 2: Tracking (if product dispatched) */}
       {product.status === "dispatched" && (
         <section className="mb-8">
-          <div className="glass-card-light p-5 border-l-4 border-l-[#5BAAFF]">
-            <div className="flex items-center gap-2 text-sm text-[#5BAAFF] mb-1">
+          <div className="glass-card p-5 border-l-4 border-l-[#3B82F6]">
+            <div className="flex items-center gap-2 text-sm text-[#3B82F6] mb-1">
               <Truck className="w-4 h-4" /> Your product is on its way
             </div>
             {product.tracking_link && (
-              <a href={product.tracking_link} target="_blank" rel="noopener noreferrer" className="text-sm text-[#5BAAFF] underline flex items-center gap-1 mt-2">
+              <a href={product.tracking_link} target="_blank" rel="noopener noreferrer" className="text-sm text-[#3B82F6] underline flex items-center gap-1 mt-2">
                 Track Shipment <ExternalLink className="w-3 h-3" />
               </a>
             )}
@@ -162,28 +162,28 @@ export default function CreatorProductDetailPage() {
       {/* Section 3: Brief */}
       {(product.script_content || product.brief_url) && preference && (
         <section className="mb-8">
-          <h2 className="font-display font-semibold text-base text-[#111116] mb-3 flex items-center gap-2">
-            <FileText className="w-4 h-4" /> Brief
+          <h2 className="font-display font-semibold text-base text-white mb-3 flex items-center gap-2">
+            <FileText className="w-4 h-4 text-white/40" /> Brief
           </h2>
-          <div className="glass-card-light p-5">
+          <div className="glass-card p-5">
             {product.script_content && (
-              <div className="prose prose-sm max-w-none text-[#111116] mb-4" style={{ fontSize: "16px", lineHeight: "1.8" }}>
+              <div className="prose prose-invert prose-sm max-w-none text-white/80 mb-4" style={{ fontSize: "16px", lineHeight: "1.8" }}>
                 {product.script_content}
               </div>
             )}
             <div className="flex gap-2 flex-wrap">
               {product.brief_url && (
-                <a href={product.brief_url} target="_blank" rel="noopener noreferrer" className="btn-ghost-light text-xs">
+                <a href={product.brief_url} target="_blank" rel="noopener noreferrer" className="btn-ghost text-xs">
                   Open Full Brief <ExternalLink className="w-3 h-3" />
                 </a>
               )}
               {product.sop_url && (
-                <a href={product.sop_url} target="_blank" rel="noopener noreferrer" className="btn-ghost-light text-xs">
+                <a href={product.sop_url} target="_blank" rel="noopener noreferrer" className="btn-ghost text-xs">
                   View SOP <ExternalLink className="w-3 h-3" />
                 </a>
               )}
             </div>
-            <p className="text-xs text-[#9A9AAA] mt-3">Brief v{product.script_version} — Updated {formatDate(product.updated_at)}</p>
+            <p className="text-xs text-white/30 mt-3">Brief v{product.script_version} — Updated {formatDate(product.updated_at)}</p>
           </div>
         </section>
       )}
@@ -191,8 +191,8 @@ export default function CreatorProductDetailPage() {
       {/* Section 4: Submission */}
       {preference && (
         <section className="mb-8">
-          <h2 className="font-display font-semibold text-base text-[#111116] mb-3 flex items-center gap-2">
-            <Video className="w-4 h-4" /> Submit Your Video
+          <h2 className="font-display font-semibold text-base text-white mb-3 flex items-center gap-2">
+            <Video className="w-4 h-4 text-white/40" /> Submit Your Video
           </h2>
 
           {/* Revision feedback */}
@@ -201,7 +201,7 @@ export default function CreatorProductDetailPage() {
               <div className="flex items-center gap-2 text-sm font-semibold text-[#FFB547] mb-1">
                 <AlertTriangle className="w-4 h-4" /> Revision Needed
               </div>
-              <p className="text-sm text-[#5A5A6E]">{latestSub.revision_feedback}</p>
+              <p className="text-sm text-white/60">{latestSub.revision_feedback}</p>
             </div>
           )}
 
@@ -210,13 +210,13 @@ export default function CreatorProductDetailPage() {
             <div className="p-5 rounded-xl bg-[rgba(45,212,161,0.06)] border border-[rgba(45,212,161,0.15)] text-center">
               <Check className="w-8 h-8 text-[#2DD4A1] mx-auto mb-2" />
               <p className="text-sm font-semibold text-[#2DD4A1]">Approved ✓ Great work!</p>
-              {latestSub.approved_at && <p className="text-xs text-[#5A5A6E] mt-1">Approved on {formatDate(latestSub.approved_at)}</p>}
+              {latestSub.approved_at && <p className="text-xs text-white/40 mt-1">Approved on {formatDate(latestSub.approved_at)}</p>}
             </div>
           ) : (
             <>
               {/* Drive link input */}
-              <div className="glass-card-light p-5 mb-4">
-                <label className="block text-xs font-semibold uppercase tracking-wider text-[#5A5A6E] mb-2">
+              <div className="glass-card p-5 mb-4">
+                <label className="block text-xs font-semibold uppercase tracking-wider text-white/40 mb-2">
                   Google Drive Link
                 </label>
                 <input
@@ -225,12 +225,12 @@ export default function CreatorProductDetailPage() {
                   value={driveLink}
                   onChange={(e) => { setDriveLink(e.target.value); setDriveLinkError(""); }}
                   placeholder="https://drive.google.com/..."
-                  className="w-full px-4 py-3 rounded-xl bg-[#F5F5F7] border border-[rgba(0,0,0,0.07)] text-sm text-[#111116] placeholder:text-[#9A9AAA] focus:outline-none focus:border-[#CAFF4C]"
+                  className="w-full px-4 py-3 rounded-xl bg-white/[0.04] border border-white/[0.08] text-sm text-white placeholder:text-white/25 focus:outline-none focus:border-white/30"
                   style={{ fontSize: "16px" }}
                 />
                 {driveLinkError && <p className="mt-1.5 text-xs text-[#FF6B5B]">{driveLinkError}</p>}
-                <button onClick={submitContent} disabled={isSubmittingContent} className="btn-lime-pill w-full mt-4 text-base flex items-center justify-center gap-2">
-                  {isSubmittingContent ? <LoadingSpinner size="sm" color="#0C0C0F" /> : null}
+                <button onClick={submitContent} disabled={isSubmittingContent} className="btn-primary w-full mt-4 text-base flex items-center justify-center gap-2">
+                  {isSubmittingContent ? <LoadingSpinner size="sm" color="#050505" /> : null}
                   Submit Video
                 </button>
               </div>
@@ -240,17 +240,17 @@ export default function CreatorProductDetailPage() {
           {/* Submission history */}
           {submissions.length > 0 && (
             <div className="mt-4">
-              <h3 className="text-xs font-semibold uppercase tracking-wider text-[#9A9AAA] mb-2">Submission History</h3>
+              <h3 className="text-xs font-semibold uppercase tracking-wider text-white/40 mb-2">Submission History</h3>
               <div className="space-y-2">
                 {submissions.map((sub, i) => (
-                  <div key={sub.id} className="flex items-center justify-between px-4 py-3 rounded-xl bg-[#F5F5F7] border border-[rgba(0,0,0,0.04)]">
+                  <div key={sub.id} className="flex items-center justify-between px-4 py-3 rounded-xl bg-white/[0.04] border border-white/[0.08]">
                     <div className="flex items-center gap-3">
-                      <span className="text-xs font-mono text-[#9A9AAA]">v{submissions.length - i}</span>
+                      <span className="text-xs font-mono text-white/40">v{submissions.length - i}</span>
                       <StatusPill status={sub.status} type="content_submission" />
                     </div>
                     <div className="flex items-center gap-3">
-                      <span className="text-xs text-[#9A9AAA]">{formatDate(sub.submitted_at)}</span>
-                      <a href={sub.drive_link} target="_blank" rel="noopener noreferrer" className="text-xs text-[#5BAAFF]">
+                      <span className="text-xs text-white/40">{formatDate(sub.submitted_at)}</span>
+                      <a href={sub.drive_link} target="_blank" rel="noopener noreferrer" className="text-xs text-[#2DD4A1]">
                         <ExternalLink className="w-3 h-3" />
                       </a>
                     </div>

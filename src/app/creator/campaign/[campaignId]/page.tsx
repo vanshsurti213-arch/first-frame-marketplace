@@ -64,15 +64,15 @@ export default function CreatorCampaignDetailPage() {
     setSavingAddress(false);
   };
 
-  if (creatorLoading || loading) return <FullPageLoader />;
-  if (!campaign) return <EmptyState variant="light" title="Campaign not found" />;
+  if (creatorLoading || loading) return <FullPageLoader message="Loading campaign details..." />;
+  if (!campaign) return <EmptyState title="Campaign not found" />;
 
   const hasSubmittedPreference = (productId: string) => preferences.some((p) => p.product_id === productId);
 
   // Determine smart CTA per product
   const getProductCTA = (product: Product) => {
     const pref = preferences.find((p) => p.product_id === product.id);
-    if (!pref) return { label: "Choose Your Product ↗", variant: "lime" as const, action: () => router.push(`/creator/campaign/${campaignId}/product/${product.id}`) };
+    if (!pref) return { label: "Choose Your Product ↗", variant: "primary" as const, action: () => router.push(`/creator/campaign/${campaignId}/product/${product.id}`) };
     return { label: "View Details ↗", variant: "ghost" as const, action: () => router.push(`/creator/campaign/${campaignId}/product/${product.id}`) };
   };
 
@@ -80,26 +80,26 @@ export default function CreatorCampaignDetailPage() {
     <div className="animate-fade-in">
       {/* Header */}
       <div className="mb-6">
-        <h1 className="font-display font-bold text-xl text-[#111116]">{campaign.name}</h1>
-        <p className="text-sm text-[#5A5A6E] mt-1">{campaign.brand_name}</p>
+        <h1 className="font-display font-bold text-xl text-white">{campaign.name}</h1>
+        <p className="text-sm text-white/40 mt-1">{campaign.brand_name}</p>
       </div>
 
       {/* Products */}
       <div className="mb-8">
-        <h2 className="font-display font-semibold text-base text-[#111116] mb-3">Products</h2>
+        <h2 className="font-display font-semibold text-base text-white mb-3">Products</h2>
         {products.length === 0 ? (
-          <EmptyState variant="light" icon={<Package className="w-7 h-7 text-[#9A9AAA]" />} title="No products yet" description="Products will appear here once they're added to the campaign." />
+          <EmptyState icon={<Package className="w-7 h-7 text-white/20" />} title="No products yet" description="Products will appear here once they're added to the campaign." />
         ) : (
           <div className="space-y-3">
             {products.map((product) => {
               const cta = getProductCTA(product);
               const hasPref = hasSubmittedPreference(product.id);
               return (
-                <div key={product.id} className="glass-card-light p-5">
+                <div key={product.id} className="glass-card p-5">
                   <div className="flex items-start justify-between mb-3">
                     <div>
-                      <h3 className="font-semibold text-[#111116]">{product.name}</h3>
-                      <p className="text-xs text-[#9A9AAA] mt-1">{product.variants?.length || 0} variant{(product.variants?.length || 0) !== 1 ? "s" : ""}</p>
+                      <h3 className="font-semibold text-white">{product.name}</h3>
+                      <p className="text-xs text-white/40 mt-1">{product.variants?.length || 0} variant{(product.variants?.length || 0) !== 1 ? "s" : ""}</p>
                     </div>
                     {hasPref && (
                       <div className="flex items-center gap-1 text-xs text-[#2DD4A1]">
@@ -109,7 +109,7 @@ export default function CreatorCampaignDetailPage() {
                   </div>
                   <button
                     onClick={cta.action}
-                    className={cta.variant === "lime" ? "btn-lime-pill text-sm w-full" : "btn-ghost-light text-sm w-full text-center justify-center"}
+                    className={cta.variant === "primary" ? "btn-primary text-sm w-full" : "btn-ghost text-sm w-full text-center justify-center"}
                   >
                     {cta.label}
                   </button>
@@ -122,15 +122,15 @@ export default function CreatorCampaignDetailPage() {
 
       {/* Shipping Address */}
       <div className="mb-8">
-        <h2 className="font-display font-semibold text-base text-[#111116] mb-3 flex items-center gap-2">
-          <MapPin className="w-4 h-4" /> Shipping Address
+        <h2 className="font-display font-semibold text-base text-white mb-3 flex items-center gap-2">
+          <MapPin className="w-4 h-4 text-white/40" /> Shipping Address
         </h2>
-        <div className="glass-card-light p-5">
+        <div className="glass-card p-5">
           {cc?.shipping_address && !editingAddress ? (
             <div>
-              <p className="text-sm text-[#111116] whitespace-pre-wrap">{cc.shipping_address}</p>
-              <button onClick={() => setEditingAddress(true)} className="text-xs text-[#5BAAFF] mt-2 flex items-center gap-1">
-                <Pencil className="w-3 h-3" /> Edit
+              <p className="text-sm text-white whitespace-pre-wrap">{cc.shipping_address}</p>
+              <button onClick={() => setEditingAddress(true)} className="text-xs text-[#2DD4A1] mt-2 flex items-center gap-1">
+                <Pencil className="w-3 h-3" /> Edit Address
               </button>
             </div>
           ) : (
@@ -140,10 +140,10 @@ export default function CreatorCampaignDetailPage() {
                 onChange={(e) => setAddress(e.target.value)}
                 placeholder="Enter your full shipping address"
                 rows={3}
-                className="w-full px-4 py-3 rounded-xl bg-[#F5F5F7] border border-[rgba(0,0,0,0.07)] text-sm text-[#111116] placeholder:text-[#9A9AAA] focus:outline-none focus:border-[#CAFF4C] resize-none"
+                className="w-full px-4 py-3 rounded-xl bg-white/[0.04] border border-white/[0.08] text-sm text-white placeholder:text-white/25 focus:outline-none focus:border-white/30 resize-none"
                 style={{ fontSize: "16px" }}
               />
-              <button onClick={saveAddress} disabled={savingAddress} className="btn-lime-pill text-sm w-full">
+              <button onClick={saveAddress} disabled={savingAddress} className="btn-primary text-sm w-full">
                 {savingAddress ? "Saving..." : "Save Address"}
               </button>
             </div>

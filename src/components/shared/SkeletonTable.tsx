@@ -18,6 +18,10 @@ export function SkeletonTable({
 }: SkeletonTableProps) {
   const shimmerClass = variant === "dark" ? "skeleton-shimmer" : "skeleton-shimmer-light";
 
+  // Deterministic widths to avoid SSR hydration mismatch
+  const HEADER_WIDTHS = [80, 120, 100, 90, 110, 70, 130, 95];
+  const CELL_WIDTHS = [100, 80, 140, 60, 120, 90, 110, 70, 130, 150];
+
   return (
     <div className={cn("w-full animate-fade-in", className)}>
       {/* Header row */}
@@ -26,7 +30,7 @@ export function SkeletonTable({
           <div
             key={`head-${i}`}
             className={cn("h-3 rounded-full", shimmerClass)}
-            style={{ width: `${60 + Math.random() * 80}px` }}
+            style={{ width: `${HEADER_WIDTHS[i % HEADER_WIDTHS.length]}px` }}
           />
         ))}
       </div>
@@ -46,7 +50,7 @@ export function SkeletonTable({
               key={`cell-${rowIdx}-${colIdx}`}
               className={cn("h-4 rounded", shimmerClass)}
               style={{
-                width: `${40 + Math.random() * 120}px`,
+                width: `${CELL_WIDTHS[(rowIdx * cols + colIdx) % CELL_WIDTHS.length]}px`,
                 animationDelay: `${rowIdx * 100 + colIdx * 50}ms`,
               }}
             />

@@ -10,7 +10,7 @@ export default function BrandLayout({ children }: { children: React.ReactNode })
 
   return (
     <BrandProvider>
-      <div className={`min-h-screen ${isLoginPage ? "" : "theme-brand bg-[#F7F7F8]"}`}>
+      <div className={`min-h-screen ${isLoginPage ? "" : "theme-brand bg-[#050505]"}`}>
         {!isLoginPage && <BrandNav />}
         <main className={isLoginPage ? "" : "max-w-7xl mx-auto px-6 py-8"}>
           {children}

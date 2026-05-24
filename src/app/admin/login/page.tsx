@@ -97,20 +97,20 @@ export default function AdminLoginPage() {
   };
 
   return (
-    <div className="min-h-screen bg-admin-gradient flex items-center justify-center p-6">
+    <div className="min-h-screen bg-[#050505] flex items-center justify-center p-6">
       <div className="w-full max-w-5xl grid md:grid-cols-2 gap-16 items-center">
         {/* Left — Branding */}
         <div className="hidden md:block">
           <h1 className="font-display font-extrabold text-5xl text-white leading-tight tracking-tight">
             Firstframe
           </h1>
-          <p className="mt-4 text-lg text-[#8A8A9A] leading-relaxed">
+          <p className="mt-4 text-lg text-white/40 leading-relaxed">
             The operating layer for UGC campaigns.
           </p>
           <div className="mt-8 flex gap-3">
-            <div className="w-2 h-2 rounded-full bg-[#CAFF4C] animate-pulse-dot" />
-            <div className="w-2 h-2 rounded-full bg-[#CAFF4C] animate-pulse-dot" style={{ animationDelay: "200ms" }} />
-            <div className="w-2 h-2 rounded-full bg-[#CAFF4C] animate-pulse-dot" style={{ animationDelay: "400ms" }} />
+            <div className="w-2 h-2 rounded-full bg-white animate-pulse-dot" />
+            <div className="w-2 h-2 rounded-full bg-white animate-pulse-dot" style={{ animationDelay: "200ms" }} />
+            <div className="w-2 h-2 rounded-full bg-white animate-pulse-dot" style={{ animationDelay: "400ms" }} />
           </div>
         </div>
 
@@ -121,27 +121,27 @@ export default function AdminLoginPage() {
             <h1 className="font-display font-extrabold text-3xl text-white">
               Firstframe
             </h1>
-            <p className="mt-2 text-sm text-[#8A8A9A]">
+            <p className="mt-2 text-sm text-white/40">
               The operating layer for UGC campaigns.
             </p>
           </div>
 
-          <h2 className="font-display font-bold text-xl text-[#F2F2F3] mb-1">
+          <h2 className="font-display font-bold text-xl text-white mb-1">
             Welcome back
           </h2>
-          <p className="text-sm text-[#8A8A9A] mb-8">
+          <p className="text-sm text-white/40 mb-8">
             Sign in to the admin dashboard
           </p>
 
           <form onSubmit={handleLogin} className="space-y-5">
             <div>
-              <label className="block text-xs font-semibold uppercase tracking-wider text-[#8A8A9A] mb-2">
+              <label className="block text-xs font-semibold uppercase tracking-wider text-white/40 mb-2">
                 Email
               </label>
               <input
                 type="email"
                 autoComplete="email"
-                className="w-full px-4 py-3 rounded-lg bg-[rgba(255,255,255,0.04)] border border-[rgba(255,255,255,0.09)] text-[#F2F2F3] text-sm placeholder:text-[#4A4A5A] focus:outline-none focus:border-[#CAFF4C] focus:ring-1 focus:ring-[#CAFF4C] transition-colors"
+                className="w-full px-4 py-3 rounded-lg bg-white/[0.04] border border-white/[0.08] text-white text-sm placeholder:text-white/25 focus:outline-none focus:border-white/30 focus:ring-1 focus:ring-white/20 transition-colors"
                 placeholder="admin@firstframe.in"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
@@ -149,13 +149,13 @@ export default function AdminLoginPage() {
             </div>
 
             <div>
-              <label className="block text-xs font-semibold uppercase tracking-wider text-[#8A8A9A] mb-2">
+              <label className="block text-xs font-semibold uppercase tracking-wider text-white/40 mb-2">
                 Password
               </label>
               <input
                 type="password"
                 autoComplete="current-password"
-                className="w-full px-4 py-3 rounded-lg bg-[rgba(255,255,255,0.04)] border border-[rgba(255,255,255,0.09)] text-[#F2F2F3] text-sm placeholder:text-[#4A4A5A] focus:outline-none focus:border-[#CAFF4C] focus:ring-1 focus:ring-[#CAFF4C] transition-colors"
+                className="w-full px-4 py-3 rounded-lg bg-white/[0.04] border border-white/[0.08] text-white text-sm placeholder:text-white/25 focus:outline-none focus:border-white/30 focus:ring-1 focus:ring-white/20 transition-colors"
                 placeholder="••••••••"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
@@ -176,7 +176,7 @@ export default function AdminLoginPage() {
             >
               {loading ? (
                 <>
-                  <LoadingSpinner size="sm" color="#0C0C0F" />
+                  <LoadingSpinner size="sm" color="#050505" />
                   {status || "Signing in..."}
                 </>
               ) : (

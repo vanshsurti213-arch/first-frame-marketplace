@@ -88,10 +88,8 @@ export function CreatorCard({
           className="creator-card__thumbnail"
         />
       ) : !videoUrl ? (
-        <div className="creator-card__thumbnail flex items-center justify-center" style={{
-          background: 'linear-gradient(135deg, var(--surface-2) 0%, var(--bg-deep) 100%)'
-        }}>
-          <span className="text-6xl font-display font-light text-[var(--cream-faint)] opacity-30">
+        <div className="creator-card__thumbnail flex items-center justify-center bg-gradient-to-br from-white/[0.04] to-black">
+          <span className="text-6xl font-display font-light text-white opacity-20">
             {name.charAt(0).toUpperCase()}
           </span>
         </div>
@@ -100,7 +98,7 @@ export function CreatorCard({
       {/* Hover Video Player (Unchanged functionality, just updated class references if any) */}
       {videoUrl && (
         <div 
-          className={`absolute inset-0 transition-opacity duration-500 z-10 bg-[#0C1130] ${
+          className={`absolute inset-0 transition-opacity duration-500 z-10 bg-[#050505] ${
             (isHovered || !thumbnailUrl) ? "opacity-100" : "opacity-0"
           }`}
         >

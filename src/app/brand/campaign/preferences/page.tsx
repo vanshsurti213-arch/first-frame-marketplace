@@ -56,11 +56,11 @@ export default function BrandPreferencesPage() {
     <div className="animate-fade-in">
       <div className="flex items-center justify-between mb-8">
         <div>
-          <h1 className="font-display font-bold text-2xl text-[#111116]">Preferences</h1>
-          <p className="text-sm text-[#5A5A6E] mt-1">View creator product preferences</p>
+          <h1 className="font-display font-bold text-2xl text-white">Preferences</h1>
+          <p className="text-sm text-white/40 mt-1">View creator product preferences</p>
         </div>
         {filteredPrefs.length > 0 && (
-          <button onClick={handleExport} className="btn-lime text-sm flex items-center gap-2">
+          <button onClick={handleExport} className="btn-primary text-sm flex items-center gap-2">
             <Download className="w-4 h-4" /> Export CSV
           </button>
         )}
@@ -68,15 +68,15 @@ export default function BrandPreferencesPage() {
 
       {/* Product tabs */}
       {products.length > 0 && (
-        <div className="flex gap-1 mb-6 border-b border-[rgba(0,0,0,0.05)] overflow-x-auto">
+        <div className="flex gap-1 mb-6 border-b border-white/[0.08] overflow-x-auto">
           {products.map((p) => (
             <button
               key={p.id}
               onClick={() => setActiveProductId(p.id)}
               className={`px-4 py-3 text-sm font-medium transition-colors border-b-2 whitespace-nowrap ${
                 activeProductId === p.id
-                  ? "text-[#111116] border-[#CAFF4C]"
-                  : "text-[#9A9AAA] border-transparent hover:text-[#5A5A6E]"
+                  ? "text-white border-white"
+                  : "text-white/40 border-transparent hover:text-white"
               }`}
             >
               {p.name}
@@ -86,23 +86,23 @@ export default function BrandPreferencesPage() {
       )}
 
       {filteredPrefs.length === 0 ? (
-        <EmptyState variant="light" icon={<ClipboardList className="w-7 h-7 text-[#9A9AAA]" />} title="No preferences yet" description="Creator preferences will appear here." />
+        <EmptyState icon={<ClipboardList className="w-7 h-7 text-white/20" />} title="No preferences yet" description="Creator preferences will appear here." />
       ) : (
-        <div className="glass-card-light overflow-hidden p-0">
+        <div className="glass-card overflow-hidden p-0">
           <table className="w-full">
             <thead>
-              <tr className="border-b border-[rgba(0,0,0,0.05)]">
-                <th className="text-left px-5 py-3 text-xs font-semibold uppercase tracking-wider text-[#9A9AAA]">Creator</th>
-                <th className="text-left px-5 py-3 text-xs font-semibold uppercase tracking-wider text-[#9A9AAA]">Variant</th>
-                <th className="text-left px-5 py-3 text-xs font-semibold uppercase tracking-wider text-[#9A9AAA]">Submitted</th>
+              <tr className="border-b border-white/[0.08]">
+                <th className="text-left px-5 py-3 text-xs font-semibold uppercase tracking-wider text-white/40">Creator</th>
+                <th className="text-left px-5 py-3 text-xs font-semibold uppercase tracking-wider text-white/40">Variant</th>
+                <th className="text-left px-5 py-3 text-xs font-semibold uppercase tracking-wider text-white/40">Submitted</th>
               </tr>
             </thead>
             <tbody>
               {filteredPrefs.map((pref) => (
-                <tr key={pref.id} className="table-row-hover-light border-b border-[rgba(0,0,0,0.04)]">
-                  <td className="px-5 py-4 text-sm font-medium text-[#111116]">{pref.creator_name.split(" ")[0]}</td>
-                  <td className="px-5 py-4 text-sm text-[#5A5A6E]">{pref.selected_variant_label}</td>
-                  <td className="px-5 py-4 text-sm text-[#5A5A6E]">{formatDate(pref.submitted_at)}</td>
+                <tr key={pref.id} className="table-row-hover border-b border-white/[0.04]">
+                  <td className="px-5 py-4 text-sm font-medium text-white">{pref.creator_name.split(" ")[0]}</td>
+                  <td className="px-5 py-4 text-sm text-white/40">{pref.selected_variant_label}</td>
+                  <td className="px-5 py-4 text-sm text-white/40">{formatDate(pref.submitted_at)}</td>
                 </tr>
               ))}
             </tbody>

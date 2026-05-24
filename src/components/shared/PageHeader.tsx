@@ -22,7 +22,7 @@ export function PageHeader({ title, breadcrumbs, actions, badge, className }: Pa
   return (
     <div className={cn("mb-8", className)}>
       {breadcrumbs && breadcrumbs.length > 0 && (
-        <nav className="flex items-center gap-1.5 text-sm text-ff-muted mb-3" aria-label="Breadcrumb">
+        <nav className="flex items-center gap-1.5 text-sm text-white/25 mb-3" aria-label="Breadcrumb">
           {breadcrumbs.map((crumb, i) => (
             <span key={i} className="flex items-center gap-1.5">
               {i > 0 && <ChevronRight className="w-3.5 h-3.5" />}

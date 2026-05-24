@@ -65,7 +65,7 @@ export function FileUpload({
         className={cn(
           "relative border-2 border-dashed rounded-lg p-6 text-center cursor-pointer transition-all duration-150",
           dragActive
-            ? "border-ff-lime/50 bg-ff-lime/5"
+            ? "border-white/30 bg-white/5"
             : "border-white/10 hover:border-white/20 bg-white/[0.02]",
           uploading && "pointer-events-none opacity-70"
         )}
@@ -85,33 +85,33 @@ export function FileUpload({
         {uploading ? (
           <div className="space-y-3">
             <LoadingSpinner size="md" />
-            <p className="text-sm text-ff-muted">Uploading… {Math.round(progress)}%</p>
+            <p className="text-sm text-white/25">Uploading… {Math.round(progress)}%</p>
             <div className="w-full h-1.5 bg-white/5 rounded-full overflow-hidden">
               <div
-                className="h-full bg-ff-lime rounded-full transition-all duration-300"
+                className="h-full bg-white rounded-full transition-all duration-300"
                 style={{ width: `${progress}%` }}
               />
             </div>
           </div>
         ) : currentFileUrl ? (
           <div className="flex items-center gap-2 justify-center">
-            <CheckCircle2 className="w-5 h-5 text-ff-success" />
+            <CheckCircle2 className="w-5 h-5 text-emerald-400" />
             <span className="text-sm text-white/70">{fileName || "File uploaded"}</span>
             <button
               onClick={(e) => {
                 e.stopPropagation();
                 setFileName(null);
               }}
-              className="ml-2 text-ff-muted hover:text-white transition-colors"
+              className="ml-2 text-white/25 hover:text-white transition-colors"
             >
               <X className="w-4 h-4" />
             </button>
           </div>
         ) : (
           <div className="space-y-2">
-            <Upload className="w-8 h-8 mx-auto text-ff-muted" />
+            <Upload className="w-8 h-8 mx-auto text-white/25" />
             <p className="text-sm text-white/70">{label}</p>
-            <p className="text-xs text-ff-muted">
+            <p className="text-xs text-white/25">
               Drag & drop or click to browse · Max {maxSizeMB}MB
             </p>
           </div>
@@ -119,7 +119,7 @@ export function FileUpload({
       </div>
 
       {error && (
-        <p className="text-xs text-ff-danger">{error}</p>
+        <p className="text-xs text-red-400">{error}</p>
       )}
     </div>
   );

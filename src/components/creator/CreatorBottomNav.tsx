@@ -17,7 +17,7 @@ export function CreatorBottomNav() {
   ];
 
   return (
-    <nav className="fixed bottom-0 left-0 right-0 z-40 bg-white border-t border-[rgba(0,0,0,0.07)] md:hidden safe-bottom">
+    <nav className="fixed bottom-0 left-0 right-0 z-40 bg-black/80 border-t border-white/[0.08] backdrop-blur-xl md:hidden safe-bottom">
       <div className="flex items-center justify-around h-16 px-4">
         {NAV_ITEMS.map((item) => {
           const isActive = pathname.startsWith(item.href) && item.href !== "#";
@@ -29,13 +29,13 @@ export function CreatorBottomNav() {
               className="flex flex-col items-center gap-1 min-w-[64px] min-h-[44px] justify-center"
             >
               <Icon
-                className="w-5 h-5"
-                style={{ color: isActive ? "#CAFF4C" : "#9A9AAA" }}
-                fill={isActive ? "#CAFF4C" : "none"}
+                className="w-5 h-5 transition-colors"
+                style={{ color: isActive ? "#FFFFFF" : "rgba(255, 255, 255, 0.4)" }}
+                fill={isActive ? "rgba(255,255,255,0.1)" : "none"}
               />
               <span
-                className="text-[10px] font-medium"
-                style={{ color: isActive ? "#111116" : "#9A9AAA" }}
+                className="text-[10px] font-medium transition-colors"
+                style={{ color: isActive ? "#FFFFFF" : "rgba(255, 255, 255, 0.4)" }}
               >
                 {item.label}
               </span>

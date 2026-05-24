@@ -31,21 +31,21 @@ export default function RootLayout({
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link
-          href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,200..400;1,9..144,200..400&family=Syne:wght@300..700&display=swap"
+          href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Syne:wght@400;500;600;700&display=swap"
           rel="stylesheet"
         />
       </head>
       <body className="antialiased min-h-screen">
-        <NextTopLoader color="#CAFF4C" height={3} showSpinner={false} />
+        <NextTopLoader color="#FFFFFF" height={3} showSpinner={false} />
         {children}
         <Toaster
           position="bottom-right"
           toastOptions={{
             duration: 3000,
             style: {
-              background: "#141418",
-              border: "1px solid rgba(255, 255, 255, 0.09)",
-              color: "#F2F2F3",
+              background: "#0A0A0A",
+              border: "1px solid rgba(255, 255, 255, 0.08)",
+              color: "#FFFFFF",
               fontFamily: "'DM Sans', sans-serif",
               borderRadius: "14px",
             },

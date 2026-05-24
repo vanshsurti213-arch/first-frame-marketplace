@@ -12,7 +12,7 @@ interface ActivityFeedProps {
 }
 
 const ACTOR_BADGE_COLORS: Record<string, { bg: string; text: string }> = {
-  admin: { bg: "rgba(202,255,76,0.12)", text: "#CAFF4C" },
+  admin: { bg: "rgba(255,255,255,0.08)", text: "#FFFFFF" },
   brand: { bg: "rgba(91,170,255,0.12)", text: "#5BAAFF" },
   creator: { bg: "rgba(244,114,182,0.12)", text: "#F472B6" },
 };
@@ -26,7 +26,7 @@ export function ActivityFeed({
 
   if (entries.length === 0) {
     return (
-      <div className={cn("py-8 text-center", isDark ? "text-[#4A4A5A]" : "text-[#9A9AAA]")}>
+      <div className={cn("py-8 text-center", isDark ? "text-white/25" : "text-white/45")}>
         No activity yet
       </div>
     );
@@ -49,7 +49,7 @@ export function ActivityFeed({
             <span
               className={cn(
                 "text-xs font-mono shrink-0 pt-0.5",
-                isDark ? "text-[#4A4A5A]" : "text-[#9A9AAA]"
+                isDark ? "text-white/25" : "text-white/45"
               )}
             >
               {formatRelativeTime(entry.timestamp)}
@@ -63,12 +63,12 @@ export function ActivityFeed({
             <span
               className={cn(
                 "text-sm font-medium shrink-0",
-                isDark ? "text-[#F2F2F3]" : "text-[#111116]"
+                isDark ? "text-white" : "text-white"
               )}
             >
               {entry.actor_name}
             </span>
-            <span className={cn("text-sm", isDark ? "text-[#8A8A9A]" : "text-[#5A5A6E]")}>
+            <span className={cn("text-sm", isDark ? "text-white/40" : "text-white/35")}>
               — {entry.action}
             </span>
           </div>

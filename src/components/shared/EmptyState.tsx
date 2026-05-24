@@ -44,7 +44,7 @@ export function EmptyState({
       <h3
         className={cn(
           "font-display font-bold text-lg mb-2",
-          isDark ? "text-[#F2F2F3]" : "text-[#111116]"
+          isDark ? "text-white" : "text-white"
         )}
       >
         {title}
@@ -53,7 +53,7 @@ export function EmptyState({
         <p
           className={cn(
             "text-sm max-w-sm",
-            isDark ? "text-[#8A8A9A]" : "text-[#5A5A6E]"
+            isDark ? "text-white/40" : "text-white/35"
           )}
         >
           {description}

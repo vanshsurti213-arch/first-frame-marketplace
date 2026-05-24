@@ -14,7 +14,7 @@ export default function AdminLayout({
 
   return (
     <AuthProvider>
-      <div className="min-h-screen bg-[#0C0C0F]">
+      <div className="min-h-screen bg-[#050505]">
         {!isLoginPage && <AdminNav />}
         <main
           className={

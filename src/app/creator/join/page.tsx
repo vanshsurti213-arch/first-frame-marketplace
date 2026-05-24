@@ -62,10 +62,10 @@ function CreatorJoinContent() {
 
   if (status === "loading") {
     return (
-      <div className="min-h-screen bg-white flex items-center justify-center">
+      <div className="min-h-screen bg-[#050505] flex items-center justify-center">
         <div className="text-center">
-          <LoadingSpinner size="lg" color="#CAFF4C" />
-          <p className="text-sm text-[#5A5A6E] mt-4">Verifying your link...</p>
+          <LoadingSpinner size="lg" color="#FFFFFF" />
+          <p className="text-sm text-white/40 mt-4">Verifying your link...</p>
         </div>
       </div>
     );
@@ -73,18 +73,18 @@ function CreatorJoinContent() {
 
   if (status === "error") {
     return (
-      <div className="min-h-screen bg-white flex items-center justify-center p-6">
+      <div className="min-h-screen bg-[#050505] flex items-center justify-center p-6">
         <div className="max-w-sm w-full text-center animate-fade-in">
-          <div className="w-16 h-16 rounded-2xl bg-[rgba(255,107,91,0.08)] flex items-center justify-center mx-auto mb-5">
-            <AlertCircle className="w-8 h-8 text-[#FF6B5B]" />
+          <div className="w-16 h-16 rounded-2xl bg-red-500/10 flex items-center justify-center mx-auto mb-5 border border-red-500/20">
+            <AlertCircle className="w-8 h-8 text-red-400" />
           </div>
-          <h1 className="font-display font-bold text-xl text-[#111116] mb-2">
+          <h1 className="font-display font-bold text-xl text-white mb-2">
             Link Invalid
           </h1>
-          <p className="text-sm text-[#5A5A6E] mb-6">
+          <p className="text-sm text-white/40 mb-6">
             {errorMessage}
           </p>
-          <p className="text-xs text-[#9A9AAA]">
+          <p className="text-xs text-white/20">
             Contact Firstframe for a new link.
           </p>
         </div>
@@ -93,24 +93,24 @@ function CreatorJoinContent() {
   }
 
   return (
-    <div className="min-h-screen bg-white flex items-center justify-center p-6">
-      <div className="max-w-sm w-full text-center animate-fade-in">
-        <div className="absolute top-0 right-0 w-72 h-72 rounded-full bg-[rgba(202,255,76,0.08)] blur-3xl -z-10" />
+    <div className="min-h-screen bg-[#050505] flex items-center justify-center p-6 relative overflow-hidden">
+      <div className="absolute top-0 right-0 w-72 h-72 rounded-full bg-white/[0.02] blur-3xl -z-10 animate-pulse" />
 
-        <div className="w-16 h-16 rounded-2xl bg-[rgba(202,255,76,0.12)] flex items-center justify-center mx-auto mb-6 animate-scale-in">
-          <Sparkles className="w-8 h-8 text-[#CAFF4C]" />
+      <div className="max-w-sm w-full text-center animate-fade-in relative z-10">
+        <div className="w-16 h-16 rounded-2xl bg-white/[0.08] border border-white/[0.12] flex items-center justify-center mx-auto mb-6 animate-scale-in">
+          <Sparkles className="w-8 h-8 text-white animate-pulse" />
         </div>
 
-        <h1 className="font-display font-bold text-3xl text-[#111116] mb-2">
+        <h1 className="font-display font-bold text-3xl text-white mb-2">
           Hi {creatorName} 👋
         </h1>
-        <p className="text-base text-[#5A5A6E] mb-8 leading-relaxed">
+        <p className="text-base text-white/40 mb-8 leading-relaxed">
           You&apos;ve been added to a campaign on Firstframe
         </p>
 
         <button
           onClick={enterPortal}
-          className="btn-lime-pill w-full text-base"
+          className="btn-primary w-full text-base"
         >
           Enter Your Portal
         </button>
@@ -123,10 +123,10 @@ export default function CreatorJoinPage() {
   return (
     <Suspense
       fallback={
-        <div className="min-h-screen bg-white flex items-center justify-center">
+        <div className="min-h-screen bg-[#050505] flex items-center justify-center">
           <div className="text-center">
-            <LoadingSpinner size="lg" color="#CAFF4C" />
-            <p className="text-sm text-[#5A5A6E] mt-4">Loading...</p>
+            <LoadingSpinner size="lg" color="#FFFFFF" />
+            <p className="text-sm text-white/40 mt-4">Loading...</p>
           </div>
         </div>
       }

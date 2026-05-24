@@ -143,10 +143,10 @@ export default function AdminCreatorsPage() {
       {/* Header */}
       <div className="flex items-center justify-between mb-8">
         <div>
-          <h1 className="font-display font-bold text-2xl text-[#F2F2F3]">
+          <h1 className="font-display font-bold text-2xl text-white">
             Creator Pool
           </h1>
-          <p className="text-sm text-[#8A8A9A] mt-1">
+          <p className="text-sm text-white/40 mt-1">
             {creators.length} creator{creators.length !== 1 ? "s" : ""} registered
           </p>
         </div>
@@ -159,13 +159,13 @@ export default function AdminCreatorsPage() {
       {/* Filters */}
       <div className="flex flex-col sm:flex-row gap-3 mb-6">
         <div className="relative flex-1 max-w-md">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#4A4A5A]" />
+          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-white/25" />
           <input
             type="text"
             placeholder="Search by name, city, or handle..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full pl-10 pr-4 py-2.5 rounded-lg bg-[rgba(255,255,255,0.04)] border border-[rgba(255,255,255,0.09)] text-sm text-[#F2F2F3] placeholder:text-[#4A4A5A] focus:outline-none focus:border-[#CAFF4C] transition-colors"
+            className="w-full pl-10 pr-4 py-2.5 rounded-lg bg-white/[0.04] border border-white/[0.08] text-sm text-white placeholder:text-white/25 focus:outline-none focus:border-white/30 transition-colors"
           />
         </div>
         <div className="flex gap-2 flex-wrap">
@@ -175,8 +175,8 @@ export default function AdminCreatorsPage() {
               onClick={() => setNicheFilter(niche)}
               className={`px-3 py-1.5 rounded-full text-xs font-medium transition-colors ${
                 nicheFilter === niche
-                  ? "bg-[#CAFF4C] text-[#0C0C0F]"
-                  : "bg-[rgba(255,255,255,0.04)] text-[#8A8A9A] hover:bg-[rgba(255,255,255,0.08)]"
+                  ? "bg-white text-black"
+                  : "bg-white/[0.04] text-white/40 hover:bg-white/[0.08]"
               }`}
             >
               {niche}
@@ -190,7 +190,7 @@ export default function AdminCreatorsPage() {
         <SkeletonGrid count={8} />
       ) : filtered.length === 0 ? (
         <EmptyState
-          icon={<Users className="w-7 h-7 text-[#4A4A5A]" />}
+          icon={<Users className="w-7 h-7 text-white/25" />}
           title={searchQuery || nicheFilter !== "All" ? "No matching creators" : "No creators yet"}
           description={
             searchQuery || nicheFilter !== "All"
@@ -249,20 +249,20 @@ export default function AdminCreatorsPage() {
               onClick={() => setShowForm(false)}
               className="absolute top-4 right-4 w-8 h-8 rounded-full bg-[rgba(255,255,255,0.06)] flex items-center justify-center hover:bg-[rgba(255,255,255,0.12)] transition-colors"
             >
-              <X className="w-4 h-4 text-[#8A8A9A]" />
+              <X className="w-4 h-4 text-white/40" />
             </button>
 
-            <h2 className="font-display font-bold text-xl text-[#F2F2F3] mb-6">
+            <h2 className="font-display font-bold text-xl text-white mb-6">
               {editingCreator ? "Edit Creator" : "Add Creator"}
             </h2>
 
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
               {/* Name */}
               <div>
-                <label className="block text-xs font-semibold uppercase tracking-wider text-[#8A8A9A] mb-1.5">Name</label>
+                <label className="block text-xs font-semibold uppercase tracking-wider text-white/40 mb-1.5">Name</label>
                 <input
                   {...register("name")}
-                  className="w-full px-4 py-2.5 rounded-lg bg-[rgba(255,255,255,0.04)] border border-[rgba(255,255,255,0.09)] text-sm text-[#F2F2F3] placeholder:text-[#4A4A5A] focus:outline-none focus:border-[#CAFF4C] transition-colors"
+                  className="w-full px-4 py-2.5 rounded-lg bg-white/[0.04] border border-white/[0.08] text-sm text-white placeholder:text-white/25 focus:outline-none focus:border-white/30 transition-colors"
                   placeholder="Full name"
                 />
                 {errors.name && <p className="mt-1 text-xs text-[#FF6B5B]">{errors.name.message}</p>}
@@ -270,10 +270,10 @@ export default function AdminCreatorsPage() {
 
               {/* Niche */}
               <div>
-                <label className="block text-xs font-semibold uppercase tracking-wider text-[#8A8A9A] mb-1.5">Niche</label>
+                <label className="block text-xs font-semibold uppercase tracking-wider text-white/40 mb-1.5">Niche</label>
                 <select
                   {...register("niche")}
-                  className="w-full px-4 py-2.5 rounded-lg bg-[rgba(255,255,255,0.04)] border border-[rgba(255,255,255,0.09)] text-sm text-[#F2F2F3] focus:outline-none focus:border-[#CAFF4C] transition-colors"
+                  className="w-full px-4 py-2.5 rounded-lg bg-white/[0.04] border border-white/[0.08] text-sm text-white focus:outline-none focus:border-white/30 transition-colors"
                 >
                   <option value="">Select niche</option>
                   {NICHE_OPTIONS.map((n) => (
@@ -285,10 +285,10 @@ export default function AdminCreatorsPage() {
 
               {/* City */}
               <div>
-                <label className="block text-xs font-semibold uppercase tracking-wider text-[#8A8A9A] mb-1.5">City</label>
+                <label className="block text-xs font-semibold uppercase tracking-wider text-white/40 mb-1.5">City</label>
                 <input
                   {...register("city")}
-                  className="w-full px-4 py-2.5 rounded-lg bg-[rgba(255,255,255,0.04)] border border-[rgba(255,255,255,0.09)] text-sm text-[#F2F2F3] placeholder:text-[#4A4A5A] focus:outline-none focus:border-[#CAFF4C] transition-colors"
+                  className="w-full px-4 py-2.5 rounded-lg bg-white/[0.04] border border-white/[0.08] text-sm text-white placeholder:text-white/25 focus:outline-none focus:border-white/30 transition-colors"
                   placeholder="e.g. Mumbai"
                 />
                 {errors.city && <p className="mt-1 text-xs text-[#FF6B5B]">{errors.city.message}</p>}
@@ -296,11 +296,11 @@ export default function AdminCreatorsPage() {
 
               {/* Email */}
               <div>
-                <label className="block text-xs font-semibold uppercase tracking-wider text-[#8A8A9A] mb-1.5">Email</label>
+                <label className="block text-xs font-semibold uppercase tracking-wider text-white/40 mb-1.5">Email</label>
                 <input
                   {...register("email")}
                   type="email"
-                  className="w-full px-4 py-2.5 rounded-lg bg-[rgba(255,255,255,0.04)] border border-[rgba(255,255,255,0.09)] text-sm text-[#F2F2F3] placeholder:text-[#4A4A5A] focus:outline-none focus:border-[#CAFF4C] transition-colors"
+                  className="w-full px-4 py-2.5 rounded-lg bg-white/[0.04] border border-white/[0.08] text-sm text-white placeholder:text-white/25 focus:outline-none focus:border-white/30 transition-colors"
                   placeholder="creator@email.com"
                 />
                 {errors.email && <p className="mt-1 text-xs text-[#FF6B5B]">{errors.email.message}</p>}
@@ -308,10 +308,10 @@ export default function AdminCreatorsPage() {
 
               {/* Phone */}
               <div>
-                <label className="block text-xs font-semibold uppercase tracking-wider text-[#8A8A9A] mb-1.5">Phone</label>
+                <label className="block text-xs font-semibold uppercase tracking-wider text-white/40 mb-1.5">Phone</label>
                 <input
                   {...register("phone")}
-                  className="w-full px-4 py-2.5 rounded-lg bg-[rgba(255,255,255,0.04)] border border-[rgba(255,255,255,0.09)] text-sm text-[#F2F2F3] placeholder:text-[#4A4A5A] focus:outline-none focus:border-[#CAFF4C] transition-colors"
+                  className="w-full px-4 py-2.5 rounded-lg bg-white/[0.04] border border-white/[0.08] text-sm text-white placeholder:text-white/25 focus:outline-none focus:border-white/30 transition-colors"
                   placeholder="+91 98765 43210"
                 />
                 {errors.phone && <p className="mt-1 text-xs text-[#FF6B5B]">{errors.phone.message}</p>}
@@ -319,10 +319,10 @@ export default function AdminCreatorsPage() {
 
               {/* Instagram Handle */}
               <div>
-                <label className="block text-xs font-semibold uppercase tracking-wider text-[#8A8A9A] mb-1.5">Instagram Handle</label>
+                <label className="block text-xs font-semibold uppercase tracking-wider text-white/40 mb-1.5">Instagram Handle</label>
                 <input
                   {...register("instagram_handle")}
-                  className="w-full px-4 py-2.5 rounded-lg bg-[rgba(255,255,255,0.04)] border border-[rgba(255,255,255,0.09)] text-sm text-[#F2F2F3] placeholder:text-[#4A4A5A] focus:outline-none focus:border-[#CAFF4C] transition-colors"
+                  className="w-full px-4 py-2.5 rounded-lg bg-white/[0.04] border border-white/[0.08] text-sm text-white placeholder:text-white/25 focus:outline-none focus:border-white/30 transition-colors"
                   placeholder="@handle"
                 />
                 {errors.instagram_handle && <p className="mt-1 text-xs text-[#FF6B5B]">{errors.instagram_handle.message}</p>}
@@ -330,11 +330,11 @@ export default function AdminCreatorsPage() {
 
               {/* Default Address */}
               <div>
-                <label className="block text-xs font-semibold uppercase tracking-wider text-[#8A8A9A] mb-1.5">Default Address</label>
+                <label className="block text-xs font-semibold uppercase tracking-wider text-white/40 mb-1.5">Default Address</label>
                 <textarea
                   {...register("default_address")}
                   rows={2}
-                  className="w-full px-4 py-2.5 rounded-lg bg-[rgba(255,255,255,0.04)] border border-[rgba(255,255,255,0.09)] text-sm text-[#F2F2F3] placeholder:text-[#4A4A5A] focus:outline-none focus:border-[#CAFF4C] transition-colors resize-none"
+                  className="w-full px-4 py-2.5 rounded-lg bg-white/[0.04] border border-white/[0.08] text-sm text-white placeholder:text-white/25 focus:outline-none focus:border-white/30 transition-colors resize-none"
                   placeholder="Pre-filled shipping address"
                 />
               </div>
@@ -342,7 +342,7 @@ export default function AdminCreatorsPage() {
               {/* Actions */}
               <div className="flex gap-3 pt-4">
                 <button type="submit" disabled={isSubmitting} className="btn-lime flex-1 flex items-center justify-center gap-2">
-                  {isSubmitting ? <LoadingSpinner size="sm" color="#0C0C0F" /> : null}
+                  {isSubmitting ? <LoadingSpinner size="sm" color="#050505" /> : null}
                   {editingCreator ? "Save Changes" : "Add Creator"}
                 </button>
                 {editingCreator && (

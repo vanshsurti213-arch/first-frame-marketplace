@@ -66,10 +66,10 @@ export default function CreatorDashboardPage() {
     <div className="animate-fade-in">
       {/* Header */}
       <div className="mb-8">
-        <h1 className="font-display font-bold text-2xl text-[#111116]">
+        <h1 className="font-display font-bold text-2xl text-white">
           Hi {creator?.creatorName?.split(" ")[0]} 👋
         </h1>
-        <p className="text-sm text-[#5A5A6E] mt-1">
+        <p className="text-sm text-white/40 mt-1">
           Here&apos;s what&apos;s happening with your campaigns
         </p>
       </div>
@@ -77,8 +77,7 @@ export default function CreatorDashboardPage() {
       {/* Campaign cards */}
       {campaignData.length === 0 ? (
         <EmptyState
-          variant="light"
-          icon={<Inbox className="w-7 h-7 text-[#9A9AAA]" />}
+          icon={<Inbox className="w-7 h-7 text-white/25" />}
           title="No campaigns yet"
           description="You haven't been added to any campaigns yet. Check back soon!"
         />
@@ -92,17 +91,17 @@ export default function CreatorDashboardPage() {
             return (
               <div
                 key={cc.id}
-                className="glass-card-light p-5 cursor-pointer hover:shadow-lg transition-shadow"
+                className="glass-card p-5 cursor-pointer hover:shadow-lg transition-shadow"
                 onClick={() => router.push(`/creator/campaign/${campaign.id}`)}
               >
                 <div className="flex items-start justify-between mb-3">
                   <div>
-                    <h3 className="font-display font-bold text-base text-[#111116]">
+                    <h3 className="font-display font-bold text-base text-white">
                       {campaign.name}
                     </h3>
-                    <p className="text-sm text-[#5A5A6E] mt-1">{message}</p>
+                    <p className="text-sm text-white/40 mt-1">{message}</p>
                   </div>
-                  <ArrowRight className="w-5 h-5 text-[#9A9AAA] flex-shrink-0 mt-1" />
+                  <ArrowRight className="w-5 h-5 text-white/40 flex-shrink-0 mt-1" />
                 </div>
 
                 {/* Progress bar */}
@@ -113,17 +112,17 @@ export default function CreatorDashboardPage() {
                         key={i}
                         className="h-1.5 flex-1 rounded-full transition-colors"
                         style={{
-                          background: i < step ? "#CAFF4C" : i === step ? "rgba(202,255,76,0.4)" : "rgba(0,0,0,0.06)",
+                          background: i < step ? "#FFFFFF" : i === step ? "rgba(255,255,255,0.4)" : "rgba(255,255,255,0.06)",
                         }}
                       />
                     ))}
                   </div>
-                  <p className="text-xs text-[#9A9AAA] mt-1.5">Step {step} of {totalSteps}</p>
+                  <p className="text-xs text-white/30 mt-1.5">Step {step} of {totalSteps}</p>
                 </div>
 
                 <div className="mt-3">
                   <button
-                    className="btn-lime-pill text-sm w-full md:w-auto"
+                    className="btn-primary text-sm w-full md:w-auto"
                     onClick={(e) => { e.stopPropagation(); router.push(`/creator/campaign/${campaign.id}`); }}
                   >
                     Go to Campaign

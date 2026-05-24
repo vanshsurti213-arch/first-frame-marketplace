@@ -182,46 +182,46 @@ export default function AdminCodesPage() {
 
       {/* Generator form */}
       <div className="glass-card p-6 mb-8">
-        <h2 className="font-display font-bold text-lg text-[#F2F2F3] mb-4">
+        <h2 className="font-display font-bold text-lg text-white mb-4">
           Generate New Code
         </h2>
         <form onSubmit={handleSubmit(onSubmit)} className="grid grid-cols-1 sm:grid-cols-3 gap-4">
           <div>
-            <label className="block text-xs font-semibold uppercase tracking-wider text-[#8A8A9A] mb-1.5">
+            <label className="block text-xs font-semibold uppercase tracking-wider text-white/40 mb-1.5">
               Brand Email
             </label>
             <input
               {...register("brand_email")}
               type="email"
-              className="w-full px-4 py-2.5 rounded-lg bg-[rgba(255,255,255,0.04)] border border-[rgba(255,255,255,0.09)] text-sm text-[#F2F2F3] placeholder:text-[#4A4A5A] focus:outline-none focus:border-[#CAFF4C] transition-colors"
+              className="w-full px-4 py-2.5 rounded-lg bg-white/[0.04] border border-white/[0.08] text-sm text-white placeholder:text-white/25 focus:outline-none focus:border-white/30 transition-colors"
               placeholder="brand@company.com"
             />
             {errors.brand_email && <p className="mt-1 text-xs text-[#FF6B5B]">{errors.brand_email.message}</p>}
           </div>
           <div>
-            <label className="block text-xs font-semibold uppercase tracking-wider text-[#8A8A9A] mb-1.5">
+            <label className="block text-xs font-semibold uppercase tracking-wider text-white/40 mb-1.5">
               Company Name
             </label>
             <input
               {...register("brand_company_name")}
-              className="w-full px-4 py-2.5 rounded-lg bg-[rgba(255,255,255,0.04)] border border-[rgba(255,255,255,0.09)] text-sm text-[#F2F2F3] placeholder:text-[#4A4A5A] focus:outline-none focus:border-[#CAFF4C] transition-colors"
+              className="w-full px-4 py-2.5 rounded-lg bg-white/[0.04] border border-white/[0.08] text-sm text-white placeholder:text-white/25 focus:outline-none focus:border-white/30 transition-colors"
               placeholder="Desh Keyboard"
             />
             {errors.brand_company_name && <p className="mt-1 text-xs text-[#FF6B5B]">{errors.brand_company_name.message}</p>}
           </div>
           <div>
-            <label className="block text-xs font-semibold uppercase tracking-wider text-[#8A8A9A] mb-1.5">
-              Expiry Date <span className="text-[#4A4A5A]">(optional)</span>
+            <label className="block text-xs font-semibold uppercase tracking-wider text-white/40 mb-1.5">
+              Expiry Date <span className="text-white/20">(optional)</span>
             </label>
             <input
               {...register("expires_at")}
               type="date"
-              className="w-full px-4 py-2.5 rounded-lg bg-[rgba(255,255,255,0.04)] border border-[rgba(255,255,255,0.09)] text-sm text-[#F2F2F3] focus:outline-none focus:border-[#CAFF4C] transition-colors"
+              className="w-full px-4 py-2.5 rounded-lg bg-white/[0.04] border border-white/[0.08] text-sm text-white focus:outline-none focus:border-white/30 transition-colors"
             />
           </div>
           <div className="sm:col-span-3">
-            <button type="submit" disabled={isSubmitting} className="btn-lime text-sm flex items-center gap-2">
-              {isSubmitting ? <LoadingSpinner size="sm" color="#0C0C0F" /> : <Key className="w-4 h-4" />}
+            <button type="submit" disabled={isSubmitting} className="btn-primary text-sm flex items-center gap-2">
+              {isSubmitting ? <LoadingSpinner size="sm" color="#050505" /> : <Key className="w-4 h-4" />}
               Generate Code
             </button>
           </div>
@@ -232,28 +232,28 @@ export default function AdminCodesPage() {
       {generatedCode && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm animate-fade-in">
           <div className="glass-card p-8 max-w-md w-full mx-4 text-center animate-scale-in">
-            <div className="w-14 h-14 rounded-2xl bg-[rgba(202,255,76,0.12)] flex items-center justify-center mx-auto mb-5">
-              <Shield className="w-7 h-7 text-[#CAFF4C]" />
+            <div className="w-14 h-14 rounded-2xl bg-white/[0.08] flex items-center justify-center mx-auto mb-5">
+              <Shield className="w-7 h-7 text-white" />
             </div>
-            <h3 className="font-display font-bold text-xl text-[#F2F2F3] mb-2">
+            <h3 className="font-display font-bold text-xl text-white mb-2">
               Access Code Generated
             </h3>
-            <p className="text-sm text-[#8A8A9A] mb-6">
+            <p className="text-sm text-white/40 mb-6">
               This code will not be shown again. Copy it now or share the link directly.
             </p>
             <div className="flex items-center justify-center gap-3 mb-6">
-              <code className="font-mono text-2xl font-bold text-[#CAFF4C] tracking-widest">
+              <code className="font-mono text-2xl font-bold text-white tracking-widest">
                 {generatedCode.code}
               </code>
               <button
                 onClick={copyCode}
-                className="w-10 h-10 rounded-lg bg-[rgba(255,255,255,0.06)] flex items-center justify-center hover:bg-[rgba(255,255,255,0.12)] transition-colors"
+                className="w-10 h-10 rounded-lg bg-white/[0.06] flex items-center justify-center hover:bg-white/[0.12] transition-colors"
                 title="Copy Code"
               >
                 {copied ? (
                   <Check className="w-5 h-5 text-[#2DD4A1]" />
                 ) : (
-                  <Copy className="w-5 h-5 text-[#8A8A9A]" />
+                  <Copy className="w-5 h-5 text-white/40" />
                 )}
               </button>
             </div>
@@ -261,7 +261,7 @@ export default function AdminCodesPage() {
             <div className="flex flex-col gap-3 mb-6">
               <button
                 onClick={copyLink}
-                className="w-full py-2.5 rounded-lg bg-[rgba(202,255,76,0.1)] text-[#CAFF4C] font-semibold text-sm hover:bg-[rgba(202,255,76,0.15)] transition-colors flex items-center justify-center gap-2"
+                className="w-full py-2.5 rounded-lg bg-white text-black font-semibold text-sm hover:bg-white/90 transition-colors flex items-center justify-center gap-2"
               >
                 {copiedLink ? <Check className="w-4 h-4" /> : <Key className="w-4 h-4" />}
                 {copiedLink ? "Link Copied!" : "Copy Shareable Login Link"}

@@ -28,10 +28,10 @@ export function LoadingSpinner({
         className
       )}
       style={{
-        borderTopColor: color || "#CAFF4C",
+        borderTopColor: color || "#FFFFFF",
         borderRightColor: "transparent",
         borderBottomColor: "transparent",
-        borderLeftColor: color || "#CAFF4C",
+        borderLeftColor: color || "#FFFFFF",
       }}
     />
   );
@@ -46,7 +46,7 @@ export function FullPageLoader({ message }: FullPageLoaderProps) {
     <div className="flex flex-col items-center justify-center min-h-[60vh] gap-4">
       <LoadingSpinner size="lg" />
       {message && (
-        <p className="text-sm text-[#8A8A9A] animate-pulse">{message}</p>
+        <p className="text-sm text-white/40 animate-pulse">{message}</p>
       )}
     </div>
   );

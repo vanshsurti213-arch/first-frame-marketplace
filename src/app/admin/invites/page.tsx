@@ -73,43 +73,43 @@ export default function AdminInvitesPage() {
   return (
     <div className="animate-fade-in">
       <div className="mb-8">
-        <h1 className="font-display font-bold text-2xl text-[#F2F2F3]">Invite Queue</h1>
-        <p className="text-sm text-[#8A8A9A] mt-1">{invites.length} pending invite{invites.length !== 1 ? "s" : ""} across all campaigns</p>
+        <h1 className="font-display font-bold text-2xl text-white">Invite Queue</h1>
+        <p className="text-sm text-white/40 mt-1">{invites.length} pending invite{invites.length !== 1 ? "s" : ""} across all campaigns</p>
       </div>
 
       {loading ? (
         <SkeletonTable rows={5} cols={5} />
       ) : invites.length === 0 ? (
-        <EmptyState icon={<Inbox className="w-7 h-7 text-[#4A4A5A]" />} title="No pending invites" description="All creator invites have been processed." />
+        <EmptyState icon={<Inbox className="w-7 h-7 text-white/25" />} title="No pending invites" description="All creator invites have been processed." />
       ) : (
         <div className="glass-card overflow-hidden p-0">
           <table className="w-full">
             <thead>
-              <tr className="border-b border-[rgba(255,255,255,0.07)]">
-                <th className="text-left px-5 py-3 text-xs font-semibold uppercase tracking-wider text-[#4A4A5A]">Campaign</th>
-                <th className="text-left px-5 py-3 text-xs font-semibold uppercase tracking-wider text-[#4A4A5A]">Brand</th>
-                <th className="text-left px-5 py-3 text-xs font-semibold uppercase tracking-wider text-[#4A4A5A]">Creator</th>
-                <th className="text-left px-5 py-3 text-xs font-semibold uppercase tracking-wider text-[#4A4A5A]">Invited</th>
-                <th className="text-left px-5 py-3 text-xs font-semibold uppercase tracking-wider text-[#4A4A5A]">Agreed Rate</th>
-                <th className="text-left px-5 py-3 text-xs font-semibold uppercase tracking-wider text-[#4A4A5A]">Brand Rate</th>
-                <th className="text-right px-5 py-3 text-xs font-semibold uppercase tracking-wider text-[#4A4A5A]">Actions</th>
+              <tr className="border-b border-white/[0.08]">
+                <th className="text-left px-5 py-3 text-xs font-semibold uppercase tracking-wider text-white/40">Campaign</th>
+                <th className="text-left px-5 py-3 text-xs font-semibold uppercase tracking-wider text-white/40">Brand</th>
+                <th className="text-left px-5 py-3 text-xs font-semibold uppercase tracking-wider text-white/40">Creator</th>
+                <th className="text-left px-5 py-3 text-xs font-semibold uppercase tracking-wider text-white/40">Invited</th>
+                <th className="text-left px-5 py-3 text-xs font-semibold uppercase tracking-wider text-white/40">Agreed Rate</th>
+                <th className="text-left px-5 py-3 text-xs font-semibold uppercase tracking-wider text-white/40">Brand Rate</th>
+                <th className="text-right px-5 py-3 text-xs font-semibold uppercase tracking-wider text-white/40">Actions</th>
               </tr>
             </thead>
             <tbody>
               {invites.map((inv) => (
-                <tr key={inv.id} className="table-row-hover border-b border-[rgba(255,255,255,0.05)]">
-                  <td className="px-5 py-4 text-sm font-medium text-[#F2F2F3]">{inv.campaign_name || "—"}</td>
-                  <td className="px-5 py-4 text-sm text-[#8A8A9A]">{inv.brand_name || "—"}</td>
-                  <td className="px-5 py-4 text-sm text-[#F2F2F3]">{inv.creator_name}</td>
-                  <td className="px-5 py-4 text-sm text-[#8A8A9A]">{formatDate(inv.invited_at)}</td>
+                <tr key={inv.id} className="table-row-hover border-b border-white/[0.04]">
+                  <td className="px-5 py-4 text-sm font-medium text-white">{inv.campaign_name || "—"}</td>
+                  <td className="px-5 py-4 text-sm text-white/40">{inv.brand_name || "—"}</td>
+                  <td className="px-5 py-4 text-sm text-white">{inv.creator_name}</td>
+                  <td className="px-5 py-4 text-sm text-white/40">{formatDate(inv.invited_at)}</td>
                   <td className="px-5 py-4">
-                    <input type="number" placeholder="₹0" className="w-20 px-2 py-1 rounded bg-[rgba(255,255,255,0.04)] border border-[rgba(255,255,255,0.09)] text-sm text-[#F2F2F3] focus:outline-none focus:border-[#CAFF4C]"
+                    <input type="number" placeholder="₹0" className="w-20 px-2 py-1 rounded bg-white/[0.04] border border-white/[0.08] text-sm text-white focus:outline-none focus:border-white/30"
                       value={rateInputs[inv.id]?.agreed || ""}
                       onChange={(e) => setRateInputs((p) => ({ ...p, [inv.id]: { ...p[inv.id], agreed: e.target.value } }))}
                     />
                   </td>
                   <td className="px-5 py-4">
-                    <input type="number" placeholder="₹0" className="w-20 px-2 py-1 rounded bg-[rgba(255,255,255,0.04)] border border-[rgba(255,255,255,0.09)] text-sm text-[#F2F2F3] focus:outline-none focus:border-[#CAFF4C]"
+                    <input type="number" placeholder="₹0" className="w-20 px-2 py-1 rounded bg-white/[0.04] border border-white/[0.08] text-sm text-white focus:outline-none focus:border-white/30"
                       value={rateInputs[inv.id]?.brand || ""}
                       onChange={(e) => setRateInputs((p) => ({ ...p, [inv.id]: { ...p[inv.id], brand: e.target.value } }))}
                     />

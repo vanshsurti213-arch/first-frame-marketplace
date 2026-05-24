@@ -104,23 +104,23 @@ export default function BrandCreatorsPage() {
   return (
     <div className="animate-fade-in">
       <div className="mb-8">
-        <h1 className="font-display font-bold text-2xl text-[#111116]">Browse Creators</h1>
-        <p className="text-sm text-[#5A5A6E] mt-1">Find and invite creators for your campaign</p>
+        <h1 className="font-display font-bold text-2xl text-white">Browse Creators</h1>
+        <p className="text-sm text-white/35 mt-1">Find and invite creators for your campaign</p>
       </div>
 
       {/* Filters */}
       <div className="flex flex-col sm:flex-row gap-3 mb-6">
         <div className="relative flex-1 max-w-md">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#9A9AAA]" />
+          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-white/45" />
           <input
             type="text" placeholder="Search by name or city..."
             value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-[#F5F5F7] border border-[rgba(0,0,0,0.07)] text-sm text-[#111116] placeholder:text-[#9A9AAA] focus:outline-none focus:border-[#CAFF4C] transition-colors"
+            className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-white/[0.04] border border-white/[0.08] text-sm text-white placeholder:text-white/45 focus:outline-none focus:border-white/30 transition-colors"
           />
         </div>
         <div className="flex gap-2 flex-wrap">
           {["All", ...NICHE_OPTIONS].map((niche) => (
-            <button key={niche} onClick={() => setNicheFilter(niche)} className={`px-3 py-1.5 rounded-full text-xs font-medium transition-colors ${nicheFilter === niche ? "bg-[#111116] text-white" : "bg-[#F5F5F7] text-[#5A5A6E] hover:bg-[#EEEEF2]"}`}>
+            <button key={niche} onClick={() => setNicheFilter(niche)} className={`px-3 py-1.5 rounded-full text-xs font-medium transition-colors ${nicheFilter === niche ? "bg-white text-black" : "bg-white/[0.04] text-white/35 hover:bg-white/[0.08]"}`}>
               {niche}
             </button>
           ))}
@@ -131,7 +131,7 @@ export default function BrandCreatorsPage() {
       {loading ? (
         <SkeletonGrid count={8} variant="light" />
       ) : filtered.length === 0 ? (
-        <EmptyState variant="light" icon={<Users className="w-7 h-7 text-[#9A9AAA]" />} title="No creators found" description="Try adjusting your search or filters." />
+        <EmptyState icon={<Users className="w-7 h-7 text-white/45" />} title="No creators found" description="Try adjusting your search or filters." />
       ) : (
         <motion.div 
           className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5"
@@ -165,14 +165,14 @@ export default function BrandCreatorsPage() {
                       In Campaign ✓
                     </div>
                   ) : status === "invited" ? (
-                    <div className="w-full py-2 text-center text-xs font-semibold text-[#CAFF4C] bg-[rgba(202,255,76,0.08)] rounded-xl">
+                    <div className="w-full py-2 text-center text-xs font-semibold text-white bg-white/[0.08] rounded-xl">
                       Invited ✓
                     </div>
                   ) : (
                     <button
                       onClick={() => inviteCreator(creator.id, creator.name)}
                       disabled={invitingId === creator.id}
-                      className="w-full py-2 text-center text-xs font-semibold text-[#111116] bg-[#CAFF4C] rounded-xl hover:bg-[#B8F030] transition-colors disabled:opacity-50"
+                      className="w-full py-2 text-center text-xs font-semibold text-black bg-white rounded-xl hover:bg-white/90 transition-colors disabled:opacity-50"
                     >
                       {invitingId === creator.id ? "Inviting..." : "Invite to Campaign"}
                     </button>

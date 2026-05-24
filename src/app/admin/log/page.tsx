@@ -47,8 +47,8 @@ export default function AdminLogPage() {
   return (
     <div className="animate-fade-in">
       <div className="mb-8">
-        <h1 className="font-display font-bold text-2xl text-[#F2F2F3]">Activity Log</h1>
-        <p className="text-sm text-[#8A8A9A] mt-1">All platform activity across campaigns</p>
+        <h1 className="font-display font-bold text-2xl text-white">Activity Log</h1>
+        <p className="text-sm text-white/40 mt-1">All platform activity across campaigns</p>
       </div>
 
       {/* Filters */}
@@ -56,7 +56,7 @@ export default function AdminLogPage() {
         <select
           value={filterCampaign}
           onChange={(e) => { setFilterCampaign(e.target.value); setPage(0); }}
-          className="px-4 py-2.5 rounded-lg bg-[rgba(255,255,255,0.04)] border border-[rgba(255,255,255,0.09)] text-sm text-[#F2F2F3] focus:outline-none focus:border-[#CAFF4C] transition-colors"
+          className="px-4 py-2.5 rounded-lg bg-white/[0.04] border border-white/[0.08] text-sm text-white focus:outline-none focus:border-white/30 transition-colors"
         >
           <option value="all">All Campaigns</option>
           {campaigns.map((c) => (
@@ -70,8 +70,8 @@ export default function AdminLogPage() {
               onClick={() => { setFilterActorType(type); setPage(0); }}
               className={`px-3 py-1.5 rounded-full text-xs font-medium capitalize transition-colors ${
                 filterActorType === type
-                  ? "bg-[#CAFF4C] text-[#0C0C0F]"
-                  : "bg-[rgba(255,255,255,0.04)] text-[#8A8A9A] hover:bg-[rgba(255,255,255,0.08)]"
+                  ? "bg-white text-black"
+                  : "bg-white/[0.04] text-white/40 hover:bg-white/[0.08]"
               }`}
             >
               {type}
@@ -84,7 +84,7 @@ export default function AdminLogPage() {
       {loading ? (
         <SkeletonTable rows={10} cols={4} />
       ) : entries.length === 0 ? (
-        <EmptyState icon={<ScrollText className="w-7 h-7 text-[#4A4A5A]" />} title="No activity recorded" description="Activity will appear here as actions are taken across the platform." />
+        <EmptyState icon={<ScrollText className="w-7 h-7 text-white/25" />} title="No activity recorded" description="Activity will appear here as actions are taken across the platform." />
       ) : (
         <>
           <div className="glass-card p-0 overflow-hidden">
@@ -99,7 +99,7 @@ export default function AdminLogPage() {
             >
               Previous
             </button>
-            <span className="text-xs text-[#4A4A5A]">Page {page + 1}</span>
+            <span className="text-xs text-white/20">Page {page + 1}</span>
             <button
               onClick={() => setPage((p) => p + 1)}
               disabled={!hasMore}

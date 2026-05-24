@@ -73,7 +73,7 @@ export default function AdminDashboardPage() {
     {
       label: "Active Campaigns",
       value: metrics?.activeCampaigns ?? "—",
-      icon: <BarChart3 className="w-5 h-5 text-[#CAFF4C]" />,
+      icon: <BarChart3 className="w-5 h-5 text-white" />,
     },
     {
       label: "Pending Invites",
@@ -96,10 +96,10 @@ export default function AdminDashboardPage() {
     <div className="animate-fade-in">
       {/* Page header */}
       <div className="mb-8">
-        <h1 className="font-display font-bold text-2xl text-[#F2F2F3]">
+        <h1 className="font-display font-bold text-2xl text-white">
           Dashboard
         </h1>
-        <p className="text-sm text-[#8A8A9A] mt-1">
+        <p className="text-sm text-white/40 mt-1">
           Welcome back, {admin?.name || "Admin"}
         </p>
       </div>
@@ -109,12 +109,12 @@ export default function AdminDashboardPage() {
         {METRIC_CARDS.map((card) => (
           <div key={card.label} className="metric-card">
             <div className="flex items-center justify-between mb-4">
-              <span className="text-xs font-semibold uppercase tracking-wider text-[#8A8A9A]">
+              <span className="text-xs font-semibold uppercase tracking-wider text-white/40">
                 {card.label}
               </span>
               {card.icon}
             </div>
-            <div className="font-display font-bold text-3xl text-[#F2F2F3]">
+            <div className="font-display font-bold text-3xl text-white">
               {loading ? (
                 <div className="h-9 w-16 skeleton-shimmer rounded" />
               ) : (
@@ -127,7 +127,7 @@ export default function AdminDashboardPage() {
 
       {/* Campaigns table */}
       <div className="mb-4 flex items-center justify-between">
-        <h2 className="font-display font-bold text-lg text-[#F2F2F3]">
+        <h2 className="font-display font-bold text-lg text-white">
           Campaigns
         </h2>
       </div>
@@ -136,7 +136,7 @@ export default function AdminDashboardPage() {
         <SkeletonTable rows={5} cols={5} />
       ) : campaigns.length === 0 ? (
         <EmptyState
-          icon={<Layers className="w-7 h-7 text-[#4A4A5A]" />}
+          icon={<Layers className="w-7 h-7 text-white/25" />}
           title="No campaigns yet"
           description="Generate an access code to onboard your first brand."
           action={
@@ -152,20 +152,20 @@ export default function AdminDashboardPage() {
         <div className="glass-card overflow-hidden p-0">
           <table className="w-full">
             <thead>
-              <tr className="border-b border-[rgba(255,255,255,0.07)]">
-                <th className="text-left px-5 py-3 text-xs font-semibold uppercase tracking-wider text-[#4A4A5A]">
+              <tr className="border-b border-white/[0.08]">
+                <th className="text-left px-5 py-3 text-xs font-semibold uppercase tracking-wider text-white/25">
                   Campaign
                 </th>
-                <th className="text-left px-5 py-3 text-xs font-semibold uppercase tracking-wider text-[#4A4A5A]">
+                <th className="text-left px-5 py-3 text-xs font-semibold uppercase tracking-wider text-white/25">
                   Brand
                 </th>
-                <th className="text-left px-5 py-3 text-xs font-semibold uppercase tracking-wider text-[#4A4A5A]">
+                <th className="text-left px-5 py-3 text-xs font-semibold uppercase tracking-wider text-white/25">
                   Status
                 </th>
-                <th className="text-left px-5 py-3 text-xs font-semibold uppercase tracking-wider text-[#4A4A5A]">
+                <th className="text-left px-5 py-3 text-xs font-semibold uppercase tracking-wider text-white/25">
                   Created
                 </th>
-                <th className="text-right px-5 py-3 text-xs font-semibold uppercase tracking-wider text-[#4A4A5A]">
+                <th className="text-right px-5 py-3 text-xs font-semibold uppercase tracking-wider text-white/25">
                   Action
                 </th>
               </tr>
@@ -174,16 +174,16 @@ export default function AdminDashboardPage() {
               {campaigns.map((campaign) => (
                 <tr
                   key={campaign.id}
-                  className="table-row-hover border-b border-[rgba(255,255,255,0.05)] cursor-pointer"
+                  className="table-row-hover border-b border-white/[0.06] cursor-pointer"
                   onClick={() => router.push(`/admin/campaign/${campaign.id}`)}
                 >
                   <td className="px-5 py-4">
-                    <span className="text-sm font-medium text-[#F2F2F3]">
+                    <span className="text-sm font-medium text-white">
                       {campaign.name}
                     </span>
                   </td>
                   <td className="px-5 py-4">
-                    <span className="text-sm text-[#8A8A9A]">
+                    <span className="text-sm text-white/40">
                       {campaign.brand_name}
                     </span>
                   </td>
@@ -195,12 +195,12 @@ export default function AdminDashboardPage() {
                     />
                   </td>
                   <td className="px-5 py-4">
-                    <span className="text-sm text-[#8A8A9A]">
+                    <span className="text-sm text-white/40">
                       {formatDate(campaign.created_at)}
                     </span>
                   </td>
                   <td className="px-5 py-4 text-right">
-                    <ArrowRight className="w-4 h-4 text-[#4A4A5A] inline" />
+                    <ArrowRight className="w-4 h-4 text-white/25 inline" />
                   </td>
                 </tr>
               ))}

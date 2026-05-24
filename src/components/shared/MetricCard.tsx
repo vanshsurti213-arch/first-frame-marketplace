@@ -16,9 +16,9 @@ export function MetricCard({ label, value, icon, className }: MetricCardProps) {
       <div className="flex items-start justify-between">
         <div>
           <p className="text-3xl font-heading font-bold text-white tracking-tight">{value}</p>
-          <p className="text-sm text-ff-muted mt-1">{label}</p>
+          <p className="text-sm text-white/25 mt-1">{label}</p>
         </div>
-        <div className="text-ff-lime/60 group-hover:text-ff-lime transition-colors">
+        <div className="text-white/50 group-hover:text-white transition-colors">
           {icon}
         </div>
       </div>
