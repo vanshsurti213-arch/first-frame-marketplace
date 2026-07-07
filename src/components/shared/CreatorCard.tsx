@@ -97,11 +97,11 @@ export function CreatorCard({
         </div>
       ) : null}
 
-      {/* Hover Video Player (Unchanged functionality, just updated class references if any) */}
+      {/* Hover Video Player */}
       {videoUrl && (
         <div 
           className={`absolute inset-0 transition-opacity duration-500 z-10 bg-[#050505] ${
-            (isHovered || !thumbnailUrl) ? "opacity-100" : "opacity-0"
+            (isHovered || !thumbnailUrl) ? "opacity-100" : "opacity-0 pointer-events-none"
           }`}
         >
           <video
@@ -115,11 +115,7 @@ export function CreatorCard({
             className="w-full h-full object-cover"
           />
           <button
-            onClick={(e) => {
-              e.preventDefault();
-              e.stopPropagation();
-              setIsMuted(!isMuted);
-            }}
+            onClick={toggleMute}
             className="absolute bottom-4 right-4 z-20 w-8 h-8 rounded-full bg-black/40 backdrop-blur-md flex items-center justify-center text-white/80 hover:text-white border border-white/10 transition-all hover:bg-black/60"
           >
             {isMuted ? <VolumeX className="w-4 h-4" /> : <Volume2 className="w-4 h-4" />}
