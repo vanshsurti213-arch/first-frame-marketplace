@@ -35,7 +35,7 @@ if (!supabaseUrl || !supabaseKey) {
 const supabase = createClient(supabaseUrl, supabaseKey);
 
 async function createAdmin() {
-  const email = 'admin@firstframe.in';
+  const email = 'firstframecreators@gmail.com';
   const password = 'password123';
 
   console.log(`Creating admin user: ${email}...`);
